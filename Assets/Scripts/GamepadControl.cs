@@ -67,20 +67,16 @@ public class GamepadControl : MonoBehaviour
 
     void HandleMovement()
     {
-        // ✅ Get the camera's forward direction
         Vector3 cameraForward = cameraLook.transform.forward;
         Vector3 cameraRight = cameraLook.transform.right;
-        
-        // ✅ Remove any vertical tilt from the camera (only use XZ plane)
+
         cameraForward.y = 0;
         cameraRight.y = 0;
         cameraForward.Normalize();
         cameraRight.Normalize();
 
-        // ✅ Convert Left Stick input into world-space movement relative to the camera
         Vector3 moveDirection = (cameraForward * currentMovement.y + cameraRight * currentMovement.x).normalized;
 
-        // ✅ Apply acceleration and deceleration
         if (movementPressed)
         {
             velocity = Vector3.Lerp(velocity, moveDirection * moveSpeed, Time.deltaTime * acceleration);
@@ -90,18 +86,24 @@ public class GamepadControl : MonoBehaviour
             velocity = Vector3.Lerp(velocity, Vector3.zero, Time.deltaTime * deceleration);
         }
 
-        // ✅ Apply movement
-        characterController.Move(velocity * Time.deltaTime);
+        Vector3 newPosition = transform.position + velocity * Time.deltaTime;
+        RaycastHit hit;
+
+        if (Physics.Raycast(newPosition + Vector3.up * 1.5f, Vector3.down, out hit, 2.0f, LayerMask.GetMask("Terrain")))
+        {
+            newPosition.y = hit.point.y;
+        }
+
+        characterController.Move(newPosition - transform.position);
     }
 
     void HandleRotation()
     {
         if (movementPressed)
         {
-            // ✅ Smoothly rotate towards movement direction
             Vector3 moveDirection = (cameraLook.transform.forward * currentMovement.y + cameraLook.transform.right * currentMovement.x);
-            moveDirection.y = 0; // Keep rotation on XZ plane
-            
+            moveDirection.y = 0;
+
             if (moveDirection.sqrMagnitude > 0.01f)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);

@@ -12,7 +12,6 @@ public class DateTimeManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(GetRealDateTimeFromAPI());
-        Debug.Log(currentDateTime);
     }
 
     public DateTime GetStartDateTime()
