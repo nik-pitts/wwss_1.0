@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Utilities;
 
 public class GamepadControl : MonoBehaviour
 {
@@ -47,6 +49,20 @@ public class GamepadControl : MonoBehaviour
             }
         };
         input.CharacterControls.Rotation.canceled += ctx => cameraRotation = Vector2.zero;
+        
+        InputSystem.onAnyButtonPress.CallOnce(ctrl =>
+        {
+            if (ctrl.device is Mouse)
+            {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
+            else if (ctrl.device is Gamepad)
+            {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
+        });
     }
 
 
