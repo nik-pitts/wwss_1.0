@@ -16,7 +16,7 @@ public class GamepadControl : MonoBehaviour
     public bool movementPressed;
     public float recordingOnProgress;
     public float moveSpeed = 3.0f;
-    public Vector2 cameraRotation;   // Right Stick Rotation
+    public Vector2 cameraRotation;
     public float rotationSpeed = 1.0f;
     public float acceleration = 2.0f;
     public float deceleration = 2.0f;
@@ -65,16 +65,12 @@ public class GamepadControl : MonoBehaviour
         });
     }
 
-
-    // Start is called before the first frame update
     void Start()
     {
         cameraLook = FindObjectOfType<CameraLook>();
-        characterController = GetComponent<CharacterController>(); // ✅ Use Unity's Character Controller for better physics
+        characterController = GetComponent<CharacterController>();
     }
-
-    // Update is called once per frame
-
+    
     private void FixedUpdate()
     {
         HandleMovement();

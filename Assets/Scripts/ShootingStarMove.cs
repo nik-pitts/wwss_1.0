@@ -69,7 +69,7 @@ public class ShootingStarMove : MonoBehaviour
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 8f);
             }
 
-            starAnimation.ResetTrigger("Sit");
+            starAnimation.ResetTrigger("Idle");
             starAnimation.SetTrigger("Jog");
         }
 
@@ -79,7 +79,7 @@ public class ShootingStarMove : MonoBehaviour
             transform.position += velocity * Time.deltaTime;
 
             starAnimation.ResetTrigger("Jog");
-            starAnimation.SetTrigger("Sit");
+            starAnimation.SetTrigger("Idle");
         }
     }
 
