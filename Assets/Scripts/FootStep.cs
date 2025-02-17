@@ -7,23 +7,48 @@ public class FootStep : MonoBehaviour
     [SerializeField] private GameObject player;
     private GamepadControl gamepadControl;
 
-    public AudioSource footstepSound;
-    // Start is called before the first frame update
+    [SerializeField] private AudioSource footstepWalk;
+    [SerializeField] private AudioSource footstepRun;
+
     void Start()
     {
         gamepadControl = player.GetComponent<GamepadControl>();
+        if (footstepWalk == null || footstepRun == null)
+        {
+            Debug.LogError("Footstep Audio Source Not Assigned.");
+            enabled = false;
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (gamepadControl.currentMovement != Vector2.zero)
         {
-            footstepSound.enabled = true;
+            HandleFootsteps();
         }
         else
         {
-            footstepSound.enabled = false;
+            StopFootsteps();
         }
+    }
+
+    void HandleFootsteps()
+    {
+        if (gamepadControl.isRunning)
+        {
+            footstepRun.enabled = true;
+            footstepWalk.enabled = false;
+        }
+        else
+        {
+            footstepRun.enabled = false;
+            footstepWalk.enabled = true;
+        }
+    }
+
+    void StopFootsteps()
+    {
+        footstepWalk.enabled = false;
+        footstepRun.enabled = false;
     }
 }

@@ -62,6 +62,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Throw"",
+                    ""type"": ""Button"",
+                    ""id"": ""9bc086ee-12d6-47ce-ac7c-e68cf2b4fe58"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -108,6 +117,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Run"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""30534108-4464-4b7f-b742-f07d4eb84465"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Throw"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -120,6 +140,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_CharacterControls_Record = m_CharacterControls.FindAction("Record", throwIfNotFound: true);
         m_CharacterControls_Rotation = m_CharacterControls.FindAction("Rotation", throwIfNotFound: true);
         m_CharacterControls_Run = m_CharacterControls.FindAction("Run", throwIfNotFound: true);
+        m_CharacterControls_Throw = m_CharacterControls.FindAction("Throw", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -185,6 +206,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterControls_Record;
     private readonly InputAction m_CharacterControls_Rotation;
     private readonly InputAction m_CharacterControls_Run;
+    private readonly InputAction m_CharacterControls_Throw;
     public struct CharacterControlsActions
     {
         private @PlayerInput m_Wrapper;
@@ -193,6 +215,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Record => m_Wrapper.m_CharacterControls_Record;
         public InputAction @Rotation => m_Wrapper.m_CharacterControls_Rotation;
         public InputAction @Run => m_Wrapper.m_CharacterControls_Run;
+        public InputAction @Throw => m_Wrapper.m_CharacterControls_Throw;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -214,6 +237,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Run.started += instance.OnRun;
             @Run.performed += instance.OnRun;
             @Run.canceled += instance.OnRun;
+            @Throw.started += instance.OnThrow;
+            @Throw.performed += instance.OnThrow;
+            @Throw.canceled += instance.OnThrow;
         }
 
         private void UnregisterCallbacks(ICharacterControlsActions instance)
@@ -230,6 +256,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Run.started -= instance.OnRun;
             @Run.performed -= instance.OnRun;
             @Run.canceled -= instance.OnRun;
+            @Throw.started -= instance.OnThrow;
+            @Throw.performed -= instance.OnThrow;
+            @Throw.canceled -= instance.OnThrow;
         }
 
         public void RemoveCallbacks(ICharacterControlsActions instance)
@@ -253,5 +282,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnRecord(InputAction.CallbackContext context);
         void OnRotation(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
+        void OnThrow(InputAction.CallbackContext context);
     }
 }

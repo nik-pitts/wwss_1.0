@@ -784,6 +784,7 @@ GameObject:
   - component: {fileID: 219306685}
   - component: {fileID: 219306684}
   - component: {fileID: 219306683}
+  - component: {fileID: 219306686}
   m_Layer: 0
   m_Name: Rockysphere
   m_TagString: Rocky
@@ -877,6 +878,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 219306681}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &219306686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219306681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 710059d6cc08d4705ad8d7a09d6c2296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &226709133 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2143639423123899489, guid: baf7e33cd9e5b2d44b83789db9b34f28,
@@ -1016,7 +1029,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 1591818809}
+  m_Material: {fileID: 673295350}
   m_Color: {r: 0.5188679, g: 0.5188679, b: 0.5188679, a: 0.29803923}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -1412,7 +1425,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 83e454ef9eca14edbaab0e29cbbc73b7, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 265f577d48f0a4fe5a0d9545bb3df6bf,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1255009235}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 265f577d48f0a4fe5a0d9545bb3df6bf,
         type: 3}
@@ -1423,6 +1440,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 784525945}
   m_SourcePrefab: {fileID: 100100000, guid: 265f577d48f0a4fe5a0d9545bb3df6bf, type: 3}
+--- !u!4 &305360258 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 265f577d48f0a4fe5a0d9545bb3df6bf,
+    type: 3}
+  m_PrefabInstance: {fileID: 305360257}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &310234565
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3163,6 +3186,37 @@ Transform:
   - {fileID: 1356561011}
   m_Father: {fileID: 920569930}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &554479716
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 554479717}
+  m_Layer: 0
+  m_Name: Throw Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &554479717
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554479716}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.06, y: 0, z: 3.03}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 963194228}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &555803859
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3702,6 +3756,47 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1165969339}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &673295350
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI/RoundedCorners/IndependentRoundedCorners
+  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _halfSize: {r: 175, g: 221.965, b: 0, a: 0}
+    - _r: {r: 10, g: 10, b: 10, a: 10}
+    - _rect2props: {r: 0.000030517578, g: 0, b: 273.62558, a: 273.62558}
+  m_BuildTextureStacks: []
 --- !u!1 &674629128
 GameObject:
   m_ObjectHideFlags: 0
@@ -3790,7 +3885,7 @@ GameObject:
   - component: {fileID: 693933072}
   m_Layer: 3
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -4260,6 +4355,7 @@ GameObject:
   - component: {fileID: 726466898}
   - component: {fileID: 726466897}
   - component: {fileID: 726466896}
+  - component: {fileID: 726466899}
   m_Layer: 0
   m_Name: Foresty Sphere-4
   m_TagString: Foresty
@@ -4353,6 +4449,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 726466894}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &726466899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726466894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 710059d6cc08d4705ad8d7a09d6c2296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &735879299 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2779535801856248954, guid: 6a816ea854d1a5e42969c18b99e9041e,
@@ -4589,6 +4697,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 832611414}
   starAnimation: {fileID: 784525943}
+  ballPoint: {fileID: 1255009234}
+  ballPrefab: {fileID: 4350874406377604858, guid: db6cb79803d99de41ae15f15a875d281,
+    type: 3}
+  chatGptManagerGameObj: {fileID: 722891396}
 --- !u!4 &786118379 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4524772018323796332, guid: 716232dd41c7bd940ae685568a578642,
@@ -5177,6 +5289,7 @@ GameObject:
   - component: {fileID: 832611424}
   - component: {fileID: 832611425}
   - component: {fileID: 832611426}
+  - component: {fileID: 832611427}
   m_Layer: 0
   m_Name: PlayerBody
   m_TagString: Untagged
@@ -5198,6 +5311,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 963194228}
+  - {fileID: 1466457362}
   m_Father: {fileID: 2056878845}
   m_LocalEulerAnglesHint: {x: 0, y: -192.275, z: 0}
 --- !u!23 &832611417
@@ -5313,11 +5427,17 @@ MonoBehaviour:
   currentMovement: {x: 0, y: 0}
   movementPressed: 0
   recordingOnProgress: 0
+  isRunning: 0
   moveSpeed: 3
+  runSpeedMultiplier: 2
   cameraRotation: {x: 0, y: 0}
   rotationSpeed: 1
   acceleration: 2
   deceleration: 2
+  throwablePrefab: {fileID: 4350874406377604858, guid: db6cb79803d99de41ae15f15a875d281,
+    type: 3}
+  throwPoint: {fileID: 554479717}
+  throwForce: 12
 --- !u!114 &832611425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5358,6 +5478,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &832611427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832611414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 710059d6cc08d4705ad8d7a09d6c2296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &838211181
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5597,6 +5729,7 @@ GameObject:
   - component: {fileID: 913056062}
   - component: {fileID: 913056061}
   - component: {fileID: 913056060}
+  - component: {fileID: 913056063}
   m_Layer: 0
   m_Name: Haystick Sphere
   m_TagString: Haystick
@@ -5690,6 +5823,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 913056058}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &913056063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913056058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 710059d6cc08d4705ad8d7a09d6c2296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &918202642 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5797096815418678407, guid: f774785ff44bb6c4b9d0aacfdaceb79e,
@@ -6034,7 +6179,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 50.49045
+  field of view: 50
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -6060,13 +6205,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.003036499, y: 1.6600037, z: 0.21431732}
-  m_LocalScale: {x: 1.4256, y: 0.36538, z: 0.6521}
+  m_LocalRotation: {x: -0, y: 0.10665991, z: -0, w: 0.9942956}
+  m_LocalPosition: {x: 0.00000081099876, y: 1.2, z: 0.0000037274917}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 554479717}
   m_Father: {fileID: 832611415}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 12.246, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6302,6 +6448,7 @@ GameObject:
   - component: {fileID: 977631466}
   - component: {fileID: 977631465}
   - component: {fileID: 977631464}
+  - component: {fileID: 977631467}
   m_Layer: 0
   m_Name: Foresty Sphere-6
   m_TagString: Foresty
@@ -6395,6 +6542,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 977631462}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &977631467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 977631462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 710059d6cc08d4705ad8d7a09d6c2296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &978492076
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7574,6 +7733,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f774785ff44bb6c4b9d0aacfdaceb79e, type: 3}
+--- !u!1 &1255009234
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1255009235}
+  m_Layer: 0
+  m_Name: Ball Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1255009235
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255009234}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.013, y: 1.07, z: 3.94}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 305360258}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1259520774 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5797096815418678407, guid: f774785ff44bb6c4b9d0aacfdaceb79e,
@@ -7925,6 +8115,7 @@ GameObject:
   - component: {fileID: 1396599562}
   - component: {fileID: 1396599561}
   - component: {fileID: 1396599560}
+  - component: {fileID: 1396599563}
   m_Layer: 0
   m_Name: Lighthouse Sphere
   m_TagString: Lighthouse
@@ -8018,6 +8209,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1396599558}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1396599563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396599558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 710059d6cc08d4705ad8d7a09d6c2296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1412875003 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9093257193123151483, guid: 7f3d30d05aa72a14e956d5a91a4012a5,
@@ -8072,8 +8275,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1438623987}
-  - component: {fileID: 1438623989}
   - component: {fileID: 1438623988}
+  - component: {fileID: 1438623989}
+  - component: {fileID: 1438623990}
   m_Layer: 0
   m_Name: Footsteps
   m_TagString: Untagged
@@ -8109,7 +8313,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 832611414}
-  footstepSound: {fileID: 1438623989}
+  footstepWalk: {fileID: 1438623989}
+  footstepRun: {fileID: 1438623990}
 --- !u!82 &1438623989
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8120,9 +8325,105 @@ AudioSource:
   m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9fe61cff2639148f0a570d653f7b3df2, type: 3}
+  m_audioClip: {fileID: 8300000, guid: c1e17cd4c95ad426daab535379285488, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!82 &1438623990
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438623986}
+  m_Enabled: 0
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 55b5e00680dff4b558464f40c4ccea32, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -8563,6 +8864,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1458092915}
   m_CullTransparentMesh: 1
+--- !u!1 &1466457361
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1466457362}
+  m_Layer: 0
+  m_Name: Ball Drop
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1466457362
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1466457361}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.42, y: 0.73, z: 1.94}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 832611415}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1475868551 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 721899333449215433, guid: ffe6714c22375b347bea9d74e303f0ec,
@@ -9272,47 +9604,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 716232dd41c7bd940ae685568a578642, type: 3}
---- !u!21 &1591818809
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI/RoundedCorners/IndependentRoundedCorners
-  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
-    m_Colors:
-    - _halfSize: {r: 175, g: 221.965, b: 0, a: 0}
-    - _r: {r: 10, g: 10, b: 10, a: 10}
-    - _rect2props: {r: 0.000030517578, g: 0, b: 273.62558, a: 273.62558}
-  m_BuildTextureStacks: []
 --- !u!4 &1615090806 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 815189782755087102, guid: 8a3875b0e9f2791408e28f6ece239754,
@@ -9561,6 +9852,7 @@ GameObject:
   - component: {fileID: 1749041466}
   - component: {fileID: 1749041465}
   - component: {fileID: 1749041464}
+  - component: {fileID: 1749041467}
   m_Layer: 0
   m_Name: Foresty Sphere-3
   m_TagString: Foresty
@@ -9654,6 +9946,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1749041462}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1749041467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1749041462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 710059d6cc08d4705ad8d7a09d6c2296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1757731648 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5797096815418678407, guid: f774785ff44bb6c4b9d0aacfdaceb79e,
@@ -10521,6 +10825,7 @@ GameObject:
   - component: {fileID: 1973037606}
   - component: {fileID: 1973037605}
   - component: {fileID: 1973037604}
+  - component: {fileID: 1973037607}
   m_Layer: 0
   m_Name: Rockysphere-2
   m_TagString: Rocky
@@ -10614,6 +10919,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1973037602}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1973037607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1973037602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 710059d6cc08d4705ad8d7a09d6c2296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1995016293 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2002619021093132290, guid: 49b168466f1b2dc40b06bb343ed7b07d,
@@ -11052,6 +11369,7 @@ GameObject:
   - component: {fileID: 2038230270}
   - component: {fileID: 2038230269}
   - component: {fileID: 2038230268}
+  - component: {fileID: 2038230271}
   m_Layer: 0
   m_Name: Foresty Sphere
   m_TagString: Foresty
@@ -11145,6 +11463,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2038230266}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2038230271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2038230266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 710059d6cc08d4705ad8d7a09d6c2296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2043905680
 GameObject:
   m_ObjectHideFlags: 0
@@ -11157,6 +11487,7 @@ GameObject:
   - component: {fileID: 2043905684}
   - component: {fileID: 2043905683}
   - component: {fileID: 2043905682}
+  - component: {fileID: 2043905685}
   m_Layer: 0
   m_Name: Foresty Sphere-2
   m_TagString: Foresty
@@ -11250,6 +11581,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2043905680}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2043905685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2043905680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 710059d6cc08d4705ad8d7a09d6c2296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2056878844
 GameObject:
   m_ObjectHideFlags: 0
@@ -11276,7 +11619,7 @@ Transform:
   m_GameObject: {fileID: 2056878844}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 605.737, y: 237.9, z: 204.43}
+  m_LocalPosition: {x: 605.737, y: 238.73, z: 204.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11530,6 +11873,7 @@ GameObject:
   - component: {fileID: 2097125918}
   - component: {fileID: 2097125917}
   - component: {fileID: 2097125916}
+  - component: {fileID: 2097125919}
   m_Layer: 0
   m_Name: Foresty Sphere-5
   m_TagString: Foresty
@@ -11623,6 +11967,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2097125914}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2097125919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2097125914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 710059d6cc08d4705ad8d7a09d6c2296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2098184916 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4171373481817761944, guid: ccc8187e88e572048b086bd19314c90c,

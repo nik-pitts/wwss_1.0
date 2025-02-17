@@ -8,6 +8,7 @@ TagManager:
   - Foresty
   - Rocky
   - Lighthouse
+  - Terrain
   layers:
   - Default
   - TransparentFX

@@ -15,18 +15,30 @@ public class GamepadControl : MonoBehaviour
     public Vector2 currentMovement;
     public bool movementPressed;
     public float recordingOnProgress;
+    public bool isRunning = false;
     public float moveSpeed = 3.0f;
+    public float runSpeedMultiplier = 2.0f;
     public Vector2 cameraRotation;
     public float rotationSpeed = 1.0f;
     public float acceleration = 2.0f;
     public float deceleration = 2.0f;
+    private ShootingStarMove shootingStar;
 
     private Vector3 velocity = Vector3.zero;
     private CharacterController characterController;
     
+    [SerializeField] private GameObject throwablePrefab; // Assign in Unity Inspector
+    [SerializeField] private Transform throwPoint; // Assign in Unity Inspector
+    [SerializeField] private float throwForce = 15f;
+    private GameObject heldObject;
+    private bool isAiming = false;
+    private Vector3 aimDirection;
+    
     void Awake()
     {
         input = new PlayerInput();
+        
+        // move function
         input.CharacterControls.Movement.performed += ctx =>
         {
             currentMovement = ctx.ReadValue<Vector2>();
@@ -38,8 +50,18 @@ public class GamepadControl : MonoBehaviour
             movementPressed = false;
         };
         
+        // run function
+        input.CharacterControls.Run.performed += ctx => isRunning = true;
+        input.CharacterControls.Run.canceled += ctx => isRunning = false;
+        
+        // record function
         input.CharacterControls.Record.performed += ctx => recordingOnProgress = ctx.ReadValue<float>();
         
+        // throw function
+        input.CharacterControls.Throw.performed += ctx => StartAiming();
+        input.CharacterControls.Throw.canceled += ctx => ThrowObject();
+        
+        // camera rotation function
         input.CharacterControls.Rotation.performed += ctx =>
         {
             cameraRotation = ctx.ReadValue<Vector2>();
@@ -69,12 +91,18 @@ public class GamepadControl : MonoBehaviour
     {
         cameraLook = FindObjectOfType<CameraLook>();
         characterController = GetComponent<CharacterController>();
+        shootingStar = FindObjectOfType<ShootingStarMove>();
     }
     
     private void FixedUpdate()
     {
         HandleMovement();
         HandleRotation();
+        if (isAiming)
+        {
+            HandleAiming();
+            UpdateBallPosition();
+        }
     }
 
     void HandleMovement()
@@ -88,10 +116,11 @@ public class GamepadControl : MonoBehaviour
         cameraRight.Normalize();
 
         Vector3 moveDirection = (cameraForward * currentMovement.y + cameraRight * currentMovement.x).normalized;
+        float currentSpeed = isRunning ? moveSpeed * runSpeedMultiplier : moveSpeed;
 
         if (movementPressed)
         {
-            velocity = Vector3.Lerp(velocity, moveDirection * moveSpeed, Time.deltaTime * acceleration);
+            velocity = Vector3.Lerp(velocity, moveDirection * currentSpeed, Time.deltaTime * acceleration);
         }
         else
         {
@@ -113,17 +142,77 @@ public class GamepadControl : MonoBehaviour
     {
         if (movementPressed)
         {
-            Vector3 moveDirection = (cameraLook.transform.forward * currentMovement.y + cameraLook.transform.right * currentMovement.x);
+            Vector3 moveDirection = (cameraLook.transform.forward * currentMovement.y +
+                                     cameraLook.transform.right * currentMovement.x);
             moveDirection.y = 0;
 
             if (moveDirection.sqrMagnitude > 0.01f)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+                transform.rotation =
+                    Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
             }
         }
     }
+    
+    private void StartAiming()
+    {
+        Debug.Log("Aiming...");
+        if (heldObject != null) return;
 
+        isAiming = true;
+        shootingStar.StartAiming();
+
+        // Instantiate object in hand
+        heldObject = Instantiate(throwablePrefab, throwPoint.position, throwPoint.rotation);
+        heldObject.transform.SetParent(throwPoint);
+        heldObject.transform.localPosition = Vector3.zero;
+        
+        Rigidbody rb = heldObject.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.useGravity = false;
+            rb.isKinematic = true; // Prevent physics movement while aiming
+        }
+    }
+    
+    private void HandleAiming()
+    {
+        if (isAiming)
+        {
+            aimDirection = cameraLook.transform.forward;
+            heldObject.transform.rotation = Quaternion.LookRotation(aimDirection);
+        }
+    }
+
+    private void UpdateBallPosition()
+    {
+        heldObject.transform.position = throwPoint.position;
+        heldObject.transform.rotation = throwPoint.rotation;
+    }
+    
+    private void ThrowObject()
+    {
+        Debug.Log("Throwing...");
+        if (heldObject == null) return;
+
+        isAiming = false;
+        shootingStar.StopAiming(); 
+
+        heldObject.transform.SetParent(null);
+        Rigidbody rb = heldObject.GetComponent<Rigidbody>();
+
+        if (rb != null)
+        {
+            rb.isKinematic = false;
+            rb.useGravity = true;
+            rb.AddForce(aimDirection * throwForce, ForceMode.Impulse);
+        }
+
+        shootingStar.ChaseBall(heldObject);
+        heldObject = null; // Reset reference
+    }
+    
     private void OnEnable() { input.CharacterControls.Enable(); }
     private void OnDisable() { input.CharacterControls.Disable(); }
 }
