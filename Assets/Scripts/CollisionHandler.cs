@@ -32,6 +32,10 @@ public class CollisionHandler : MonoBehaviour
         {
             placeName = "Lighthouse";
         }
+        else if (other.CompareTag("Haystick"))
+        {
+            placeName = "Area with piles of hay stick";
+        }
 
         if (!string.IsNullOrEmpty(placeName))
         {

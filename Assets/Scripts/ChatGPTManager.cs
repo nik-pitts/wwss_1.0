@@ -34,6 +34,7 @@ public class ChatGPTManager : MonoBehaviour
     private int formQNum;
     private string dynamicPrompt;
     private MemoryManager memoryManager;
+    private int lastAskedQuestionIndex = -1;
 
     private List<string> activitiesLog = new List<string>();
     private float activitiyProb = 0.2f;
@@ -121,9 +122,9 @@ public class ChatGPTManager : MonoBehaviour
             messages.Add(new ChatMessage { Content = newText, Role = "user" });
             
             int questionIndex = -1;
-            if (messages.Count > 2 && !isActivitiyUpdate)
+            if (messages.Count > 2 && !isActivitiyUpdate && lastAskedQuestionIndex != -1)
             {
-                questionIndex = await FindRelevantFormQuestion(newText);
+                questionIndex = await FindRelevantFormQuestion(newText, lastAskedQuestionIndex);
             }
             
             // found relevant question
@@ -141,8 +142,9 @@ public class ChatGPTManager : MonoBehaviour
             else if (messages.Count > 2 && randomQuery.Count > 0)
             {
                 // next question
-                int nextQuestionIndex = randomQuery[0];
-                ChatRequestWithFormQuestion(newText, nextQuestionIndex);
+                int newQuestion = randomQuery[0];
+                ChatRequestWithFormQuestion(newText, newQuestion);
+                lastAskedQuestionIndex = newQuestion;
             }   
 
             request.Messages = messages;
@@ -163,46 +165,49 @@ public class ChatGPTManager : MonoBehaviour
         }
     }
     
-    private async Task<int> FindRelevantFormQuestion(string userResponse)
+    private async Task<int> FindRelevantFormQuestion(string userResponse, int questionIndex)
     {
-        foreach (var kvp in ws.formQuestions)
+        if (!randomQuery.Contains(questionIndex)) 
+            return -1; // Ensure the question is in the randomQuery list
+
+        string question = ws.formQuestions[questionIndex];
+
+        string prompt = $"Does the following player response relevant to this question?" +
+                        $"Question: {question}, " +
+                        $"Player Response: {userResponse}." +
+                        $"Think about whether you would respond {userResponse} to this {question}."+
+                        "Consider the context and connectivity of the response to the question." +
+                        "Negative answer to the question could be also relevant, but not always."+
+                        "Limit your answer with ONLY 'yes' or 'no'.";
+
+        Debug.Log(prompt);
+    
+        var checkRequest = new CreateChatCompletionRequest
         {
-            int questionIndex = kvp.Key;
-            string question = kvp.Value;
+            Messages = new List<ChatMessage> { new ChatMessage { Content = prompt, Role = "user" } },
+            Model = "gpt-4o-mini"
+        };
 
-            if (randomQuery.Contains(questionIndex)) // only check unanswered questions
+        var checkResponse = await openAI.CreateChatCompletion(checkRequest);
+        if (checkResponse.Choices != null && checkResponse.Choices.Count > 0)
+        {
+            string answer = checkResponse.Choices[0].Message.Content.Trim().ToLower();
+            string alphabetOnly = Regex.Replace(answer, "[^a-zA-Z]", "");
+        
+            Debug.Log(alphabetOnly);
+            if (alphabetOnly == "yes")
             {
-                string prompt = $"Does the following player response answer this question?" +
-                                $"Question: {question}" +
-                                $"Player Response: {userResponse}" +
-                                $"Answer with ONLY 'yes' or 'no'.";
-                Debug.Log(prompt);
-                var checkRequest = new CreateChatCompletionRequest
-                {
-                    Messages = new List<ChatMessage> { new ChatMessage { Content = prompt, Role = "user" } },
-                    Model = "gpt-4o-mini"
-                };
-
-                var checkResponse = await openAI.CreateChatCompletion(checkRequest);
-                if (checkResponse.Choices != null && checkResponse.Choices.Count > 0)
-                {
-                    string answer = checkResponse.Choices[0].Message.Content.Trim().ToLower();
-                    string alphabetOnly = Regex.Replace(answer, "[^a-zA-Z]", "");
-                    Debug.Log(alphabetOnly);
-                    if (alphabetOnly == "yes")
-                    {
-                        Debug.Log($"Relevant response to question: {question}");
-                        StoreMemory(question, userResponse);
-                        return questionIndex; // return index instead of string
-                    }
-                    else
-                    {
-                        Debug.Log($"Irrelevant response to question: {question}");
-                    }
-                }
+                Debug.Log($"Relevant response to question: {question}");
+                StoreMemory(question, userResponse);
+                return questionIndex;  // Return the index if it's relevant
+            }
+            else
+            {
+                Debug.Log($"Irrelevant response to question: {question}");
             }
         }
-        return -1; // no matching question found
+    
+        return -1; // No match
     }
 
     private void StoreMemory(string question, string userResponse)
@@ -216,9 +221,19 @@ public class ChatGPTManager : MonoBehaviour
     {
         String formQToAdd = ws.formQuestions[qNum];
 
-        String instruction = $"Considering that you should ask {formQToAdd} to player," +
-                             $"formulate your next response to naturally go well with {userResponse}";
-
+        string instruction = "";
+        if (lastAskedQuestionIndex != qNum)
+        {
+            instruction = $"Considering that you should ask {formQToAdd} to player," + 
+                          $"formulate your next response to naturally go well with {userResponse}";            
+        }
+        else
+        {
+            instruction = $"You should ask a follow up question with respect to the earlier conversation." +
+                          $"Earlier, player responded :{userResponse} to the question: {formQToAdd}." +
+                          $"Formulate relevant and natural follow up question considering this context.";
+        }
+        
         ChatMessage reformulatedRequest = new ChatMessage();
         reformulatedRequest.Content = instruction;
         reformulatedRequest.Role = "user";
