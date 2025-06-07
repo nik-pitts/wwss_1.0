@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.meta.xr.sdk.all": "77.0.0",
+    "com.meta.xr.sdk.all": "66.0.0",
     "com.srcnalt.openai-unity": "https://github.com/srcnalt/OpenAI-Unity.git",
     "com.unity.ai.navigation": "1.1.5",
     "com.unity.ide.rider": "3.0.34",
@@ -11,6 +11,7 @@
     "com.unity.textmeshpro": "3.0.9",
     "com.unity.ugui": "1.0.0",
     "com.unity.visualscripting": "1.9.5",
+    "com.unity.xr.hands": "1.4.3",
     "com.unity.xr.oculus": "4.2.0",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",

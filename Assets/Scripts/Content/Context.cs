@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
-using Meta.XR.MultiplayerBlocks.Fusion.Editor;
 
 /// <summary>
 /// Global context for managing environment
@@ -70,7 +69,7 @@ public class Context : MonoBehaviour
     private GamepadControl gamepadCtrl;
     public GamepadControl GetGamepadCtrl => gamepadCtrl;
 
-    [Header("Monobehaviours")]
+    [Header("Game Object")]
     [Header("-----------------------------")]
     [SerializeField]
     private GameObject desktopCameraObject;
@@ -79,6 +78,14 @@ public class Context : MonoBehaviour
     [SerializeField]
     private GameObject questCameraObject;
     public GameObject GetQuestCameraObject => questCameraObject;
+
+    [SerializeField]
+    private GameObject desktopCanvasObject;
+    public GameObject GetDesktopCanvasObject => desktopCanvasObject;
+
+    [SerializeField]
+    private GameObject questCanvasObject;
+    public GameObject GetQuestCanvasObject => questCanvasObject;
 
 
     private void Awake()
@@ -110,7 +117,7 @@ public class Context : MonoBehaviour
     {
         switch (currentCtrlMechanism) {
             case CtrlMechanism.gamepad:
-                SwitchDesktopCamera(true);
+                SwitchDesktopCamera(true);                
                 cameraSensitivity = cameraSensitivityGamepad;
                 break;
             case CtrlMechanism.keyboard:
@@ -118,7 +125,7 @@ public class Context : MonoBehaviour
                 cameraSensitivity = cameraSensitivityKeyboard;
                 break;
             case CtrlMechanism.vrcontroller:
-                SwitchDesktopCamera(false);
+                SwitchDesktopCamera(false);                
                 cameraSensitivity = cameraSensitivityVR;
                 break;
             default:
@@ -130,6 +137,9 @@ public class Context : MonoBehaviour
     void SwitchDesktopCamera(bool isUsingDesktopCamera)
     {
         desktopCameraObject.SetActive(isUsingDesktopCamera);
+        desktopCanvasObject.SetActive(isUsingDesktopCamera);
+
         questCameraObject.SetActive(!isUsingDesktopCamera);
+        questCanvasObject.SetActive(!isUsingDesktopCamera);
     }
 }

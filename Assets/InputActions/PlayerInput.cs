@@ -302,9 +302,134 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""CharacterControlsController"",
+            ""id"": ""1ed78b3b-6ed0-424d-98f5-65bfbcf0ae26"",
+            ""actions"": [
+                {
+                    ""name"": ""Movement"",
+                    ""type"": ""Value"",
+                    ""id"": ""c6092dd5-e2d4-436a-8bf8-60d92f4d4499"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Record"",
+                    ""type"": ""Button"",
+                    ""id"": ""17c9e8c8-3955-4e81-a4b2-0e6924c54f75"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Rotation"",
+                    ""type"": ""Value"",
+                    ""id"": ""b0dd615f-2eb5-4411-9156-d4a965e9b23d"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Run"",
+                    ""type"": ""Button"",
+                    ""id"": ""16b508ba-1fb8-4960-ae84-ba783ab0a8f4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Throw"",
+                    ""type"": ""Button"",
+                    ""id"": ""82441487-620f-415b-af65-39f618f2c0b7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""319bdd8a-4ecd-49b9-91eb-506c88c2df74"",
+                    ""path"": ""<XRController>{LeftHand}/{PrimaryButton}"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Record"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""74c1af6a-15fa-4220-8be3-abc9e14e4f5e"",
+                    ""path"": ""<XRController>{RightHand}/{Primary2DAxis}"",
+                    ""interactions"": """",
+                    ""processors"": ""StickDeadzone"",
+                    ""groups"": """",
+                    ""action"": ""Rotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aebf9fc3-0819-41d5-879d-7400b88e8a81"",
+                    ""path"": ""<XRController>{RightHand}/{PrimaryButton}"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b6f8b080-3480-4993-8a76-ec90ccf07bd1"",
+                    ""path"": ""<XRController>{RightHand}/{GripButton}"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Throw"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""85524a76-26ff-4003-8358-0a085800b759"",
+                    ""path"": ""<XRController>{RightHand}/{PrimaryTrigger}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Throw"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""feac70e5-9586-4f3e-b852-dd6bfc378ced"",
+                    ""path"": ""<XRController>{LeftHand}/{Primary2DAxis}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""WWSS"",
+            ""bindingGroup"": ""WWSS"",
+            ""devices"": []
+        }
+    ]
 }");
         // CharacterControls
         m_CharacterControls = asset.FindActionMap("CharacterControls", throwIfNotFound: true);
@@ -321,6 +446,13 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_CharacterControlsKeyboard_Run = m_CharacterControlsKeyboard.FindAction("Run", throwIfNotFound: true);
         m_CharacterControlsKeyboard_Throw = m_CharacterControlsKeyboard.FindAction("Throw", throwIfNotFound: true);
         m_CharacterControlsKeyboard_ShowMouse = m_CharacterControlsKeyboard.FindAction("ShowMouse", throwIfNotFound: true);
+        // CharacterControlsController
+        m_CharacterControlsController = asset.FindActionMap("CharacterControlsController", throwIfNotFound: true);
+        m_CharacterControlsController_Movement = m_CharacterControlsController.FindAction("Movement", throwIfNotFound: true);
+        m_CharacterControlsController_Record = m_CharacterControlsController.FindAction("Record", throwIfNotFound: true);
+        m_CharacterControlsController_Rotation = m_CharacterControlsController.FindAction("Rotation", throwIfNotFound: true);
+        m_CharacterControlsController_Run = m_CharacterControlsController.FindAction("Run", throwIfNotFound: true);
+        m_CharacterControlsController_Throw = m_CharacterControlsController.FindAction("Throw", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -542,6 +674,93 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         }
     }
     public CharacterControlsKeyboardActions @CharacterControlsKeyboard => new CharacterControlsKeyboardActions(this);
+
+    // CharacterControlsController
+    private readonly InputActionMap m_CharacterControlsController;
+    private List<ICharacterControlsControllerActions> m_CharacterControlsControllerActionsCallbackInterfaces = new List<ICharacterControlsControllerActions>();
+    private readonly InputAction m_CharacterControlsController_Movement;
+    private readonly InputAction m_CharacterControlsController_Record;
+    private readonly InputAction m_CharacterControlsController_Rotation;
+    private readonly InputAction m_CharacterControlsController_Run;
+    private readonly InputAction m_CharacterControlsController_Throw;
+    public struct CharacterControlsControllerActions
+    {
+        private @PlayerInput m_Wrapper;
+        public CharacterControlsControllerActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Movement => m_Wrapper.m_CharacterControlsController_Movement;
+        public InputAction @Record => m_Wrapper.m_CharacterControlsController_Record;
+        public InputAction @Rotation => m_Wrapper.m_CharacterControlsController_Rotation;
+        public InputAction @Run => m_Wrapper.m_CharacterControlsController_Run;
+        public InputAction @Throw => m_Wrapper.m_CharacterControlsController_Throw;
+        public InputActionMap Get() { return m_Wrapper.m_CharacterControlsController; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CharacterControlsControllerActions set) { return set.Get(); }
+        public void AddCallbacks(ICharacterControlsControllerActions instance)
+        {
+            if (instance == null || m_Wrapper.m_CharacterControlsControllerActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CharacterControlsControllerActionsCallbackInterfaces.Add(instance);
+            @Movement.started += instance.OnMovement;
+            @Movement.performed += instance.OnMovement;
+            @Movement.canceled += instance.OnMovement;
+            @Record.started += instance.OnRecord;
+            @Record.performed += instance.OnRecord;
+            @Record.canceled += instance.OnRecord;
+            @Rotation.started += instance.OnRotation;
+            @Rotation.performed += instance.OnRotation;
+            @Rotation.canceled += instance.OnRotation;
+            @Run.started += instance.OnRun;
+            @Run.performed += instance.OnRun;
+            @Run.canceled += instance.OnRun;
+            @Throw.started += instance.OnThrow;
+            @Throw.performed += instance.OnThrow;
+            @Throw.canceled += instance.OnThrow;
+        }
+
+        private void UnregisterCallbacks(ICharacterControlsControllerActions instance)
+        {
+            @Movement.started -= instance.OnMovement;
+            @Movement.performed -= instance.OnMovement;
+            @Movement.canceled -= instance.OnMovement;
+            @Record.started -= instance.OnRecord;
+            @Record.performed -= instance.OnRecord;
+            @Record.canceled -= instance.OnRecord;
+            @Rotation.started -= instance.OnRotation;
+            @Rotation.performed -= instance.OnRotation;
+            @Rotation.canceled -= instance.OnRotation;
+            @Run.started -= instance.OnRun;
+            @Run.performed -= instance.OnRun;
+            @Run.canceled -= instance.OnRun;
+            @Throw.started -= instance.OnThrow;
+            @Throw.performed -= instance.OnThrow;
+            @Throw.canceled -= instance.OnThrow;
+        }
+
+        public void RemoveCallbacks(ICharacterControlsControllerActions instance)
+        {
+            if (m_Wrapper.m_CharacterControlsControllerActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ICharacterControlsControllerActions instance)
+        {
+            foreach (var item in m_Wrapper.m_CharacterControlsControllerActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_CharacterControlsControllerActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public CharacterControlsControllerActions @CharacterControlsController => new CharacterControlsControllerActions(this);
+    private int m_WWSSSchemeIndex = -1;
+    public InputControlScheme WWSSScheme
+    {
+        get
+        {
+            if (m_WWSSSchemeIndex == -1) m_WWSSSchemeIndex = asset.FindControlSchemeIndex("WWSS");
+            return asset.controlSchemes[m_WWSSSchemeIndex];
+        }
+    }
     public interface ICharacterControlsActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -558,5 +777,13 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnRun(InputAction.CallbackContext context);
         void OnThrow(InputAction.CallbackContext context);
         void OnShowMouse(InputAction.CallbackContext context);
+    }
+    public interface ICharacterControlsControllerActions
+    {
+        void OnMovement(InputAction.CallbackContext context);
+        void OnRecord(InputAction.CallbackContext context);
+        void OnRotation(InputAction.CallbackContext context);
+        void OnRun(InputAction.CallbackContext context);
+        void OnThrow(InputAction.CallbackContext context);
     }
 }

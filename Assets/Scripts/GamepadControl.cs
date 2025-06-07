@@ -51,6 +51,10 @@ public class GamepadControl : MonoBehaviour
     {
         input = new PlayerInput();
 
+        InputSystem.onDeviceChange += (device, change) => {
+            Debug.Log($"Device: {device.displayName}, Layout: {device.layout}, Change: {change}");
+        };
+
         switch (Context.Instance.GetCurrentCtrl) {
             case CtrlMechanism.gamepad:
                 RegisterControllerInput();
@@ -59,6 +63,7 @@ public class GamepadControl : MonoBehaviour
                 RegisterKeyboardInput();
                 break;
             case CtrlMechanism.vrcontroller:
+                RegisterVRInput();
                 break;
             default:
                 break;
@@ -68,7 +73,9 @@ public class GamepadControl : MonoBehaviour
 
     void RegisterControllerInput()
     {
+        input.CharacterControlsController.Disable();
         input.CharacterControls.Enable();
+        input.CharacterControlsKeyboard.Disable();
 
         // move function
         input.CharacterControls.Movement.performed += ctx => {
@@ -121,6 +128,8 @@ public class GamepadControl : MonoBehaviour
     /// </summary>
     void RegisterKeyboardInput()
     {
+        input.CharacterControlsController.Disable();
+        input.CharacterControls.Disable();
         input.CharacterControlsKeyboard.Enable();
 
         // move function
@@ -161,6 +170,49 @@ public class GamepadControl : MonoBehaviour
         input.CharacterControlsKeyboard.ShowMouse.performed += ctx => {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
+        };
+    }
+
+    void RegisterVRInput()
+    {        
+        input.CharacterControlsController.Enable();
+        input.CharacterControls.Disable();
+        input.CharacterControlsKeyboard.Disable();
+
+        Debug.Log("VR input enabled");
+
+        // move function
+        input.CharacterControlsController.Movement.performed += ctx => {
+            currentMovement = ctx.ReadValue<Vector2>();
+            movementPressed = currentMovement.sqrMagnitude > 0;
+        };
+        input.CharacterControlsController.Movement.canceled += ctx => {
+            currentMovement = Vector2.zero;
+            movementPressed = false;
+        };
+
+        // run function
+        input.CharacterControlsController.Run.performed += ctx => isRunning = true;
+        input.CharacterControlsController.Run.canceled += ctx => isRunning = false;
+
+        // record function
+        input.CharacterControlsController.Record.performed += ctx => recordingOnProgress = ctx.ReadValue<float>();
+
+        // throw function
+        input.CharacterControlsController.Throw.performed += ctx => StartAiming();
+        input.CharacterControlsController.Throw.canceled += ctx => ThrowObject();
+
+        // camera rotation function
+        input.CharacterControlsController.Rotation.performed += ctx => {
+            cameraRotation = ctx.ReadValue<Vector2>();
+            if (cameraLook != null) {
+                cameraLook.SetCameraInput(cameraRotation);
+            }
+        };
+        input.CharacterControlsController.Rotation.canceled += ctx => {
+            cameraRotation = Vector2.zero;
+            if (cameraLook != null)
+                cameraLook.SetCameraInput(Vector2.zero);
         };
     }
 
