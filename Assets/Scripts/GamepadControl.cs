@@ -9,8 +9,11 @@ using UnityEngine.InputSystem.Utilities;
 
 public class GamepadControl : MonoBehaviour
 {
+    public static GamepadControl Instance { get; private set; }
+
     private PlayerInput input;
     private CameraLook cameraLook;
+    
     
     public Vector2 currentMovement;
     public bool movementPressed;
@@ -33,63 +36,142 @@ public class GamepadControl : MonoBehaviour
     private GameObject heldObject;
     private bool isAiming = false;
     private Vector3 aimDirection;
-    
-    void Awake()
+
+    private void Awake()
+    {
+        // init
+        if (Instance == null) {
+            Instance = this;
+        } else {            
+            Destroy(gameObject);
+        }
+    }
+
+    public void Init()
     {
         input = new PlayerInput();
+
+        switch (Context.Instance.GetCurrentCtrl) {
+            case CtrlMechanism.gamepad:
+                RegisterControllerInput();
+                break;
+            case CtrlMechanism.keyboard:
+                RegisterKeyboardInput();
+                break;
+            case CtrlMechanism.vrcontroller:
+                break;
+            default:
+                break;
+        }
         
+    }
+
+    void RegisterControllerInput()
+    {
+        input.CharacterControls.Enable();
+
         // move function
-        input.CharacterControls.Movement.performed += ctx =>
-        {
+        input.CharacterControls.Movement.performed += ctx => {
             currentMovement = ctx.ReadValue<Vector2>();
             movementPressed = currentMovement.sqrMagnitude > 0;
         };
-        input.CharacterControls.Movement.canceled += ctx => 
-        {
+        input.CharacterControls.Movement.canceled += ctx => {
             currentMovement = Vector2.zero;
             movementPressed = false;
         };
-        
+
         // run function
         input.CharacterControls.Run.performed += ctx => isRunning = true;
         input.CharacterControls.Run.canceled += ctx => isRunning = false;
-        
+
         // record function
         input.CharacterControls.Record.performed += ctx => recordingOnProgress = ctx.ReadValue<float>();
-        
+
         // throw function
         input.CharacterControls.Throw.performed += ctx => StartAiming();
         input.CharacterControls.Throw.canceled += ctx => ThrowObject();
-        
+
         // camera rotation function
-        input.CharacterControls.Rotation.performed += ctx =>
-        {
+        input.CharacterControls.Rotation.performed += ctx => {
             cameraRotation = ctx.ReadValue<Vector2>();
-            if (cameraLook != null)
-            {
+            if (cameraLook != null) {
                 cameraLook.SetCameraInput(cameraRotation);
             }
         };
-        input.CharacterControls.Rotation.canceled += ctx => cameraRotation = Vector2.zero;
-        
-        InputSystem.onAnyButtonPress.CallOnce(ctrl =>
-        {
-            if (ctrl.device is Mouse)
-            {
+        input.CharacterControls.Rotation.canceled += ctx => {
+            cameraRotation = Vector2.zero;
+            if (cameraLook != null)
+                cameraLook.SetCameraInput(Vector2.zero);
+        };
+
+        // show mouse cursor
+        InputSystem.onAnyButtonPress.CallOnce(ctrl => {
+            if (ctrl.device is Mouse) {
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
-            }
-            else if (ctrl.device is Gamepad)
-            {
+            } else if (ctrl.device is Gamepad) {
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
             }
         });
     }
 
+    /// <summary>
+    /// register for keyboard control
+    /// </summary>
+    void RegisterKeyboardInput()
+    {
+        input.CharacterControlsKeyboard.Enable();
+
+        // move function
+        input.CharacterControlsKeyboard.Movement.performed += ctx => {
+            currentMovement = ctx.ReadValue<Vector2>();
+            movementPressed = currentMovement.sqrMagnitude > 0;
+        };
+        input.CharacterControlsKeyboard.Movement.canceled += ctx => {
+            currentMovement = Vector2.zero;
+            movementPressed = false;
+        };
+
+        // run function
+        input.CharacterControlsKeyboard.Run.performed += ctx => isRunning = true;
+        input.CharacterControlsKeyboard.Run.canceled += ctx => isRunning = false;
+
+        // record function
+        input.CharacterControlsKeyboard.Record.performed += ctx => recordingOnProgress = ctx.ReadValue<float>();
+
+        // throw function
+        input.CharacterControlsKeyboard.Throw.performed += ctx => StartAiming();
+        input.CharacterControlsKeyboard.Throw.canceled += ctx => ThrowObject();
+
+        // camera rotation function
+        input.CharacterControlsKeyboard.Rotation.performed += ctx => {
+            cameraRotation = ctx.ReadValue<Vector2>();
+            if (cameraLook != null) {
+                cameraLook.SetCameraInput(cameraRotation);
+            }
+        };
+        input.CharacterControlsKeyboard.Rotation.canceled += ctx => {
+            cameraRotation = Vector2.zero;
+            if (cameraLook != null)
+                cameraLook.SetCameraInput(Vector2.zero);
+        };
+
+        // show mouse cursor
+        input.CharacterControlsKeyboard.ShowMouse.performed += ctx => {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        };
+    }
+
     void Start()
     {
-        cameraLook = FindObjectOfType<CameraLook>();
+        // choose cameraLook
+        cameraLook = 
+            (Context.Instance.GetCurrentCtrl == CtrlMechanism.gamepad || Context.Instance.GetCurrentCtrl == CtrlMechanism.keyboard) 
+        ? Context.Instance.GetDesktopCameraObject.GetComponent<CameraLook>()
+        : Context.Instance.GetQuestCameraObject.GetComponent<CameraLook>();
+
         characterController = GetComponent<CharacterController>();
         shootingStar = FindObjectOfType<ShootingStarMove>();
     }
@@ -213,6 +295,6 @@ public class GamepadControl : MonoBehaviour
         heldObject = null; // Reset reference
     }
     
-    private void OnEnable() { input.CharacterControls.Enable(); }
-    private void OnDisable() { input.CharacterControls.Disable(); }
+    // private void OnEnable() { input.CharacterControls.Enable(); }
+    // private void OnDisable() { input.CharacterControls.Disable(); }
 }

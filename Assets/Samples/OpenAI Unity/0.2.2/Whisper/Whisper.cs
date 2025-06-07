@@ -59,7 +59,12 @@ namespace Samples.Whisper
         {
             if (isRecording) return;  // Prevent multiple recordings
 
+            Debug.Log("Recording input start");
             isRecording = true;
+
+            // audio setting in Context.cs
+            if (!Context.Instance.GetNeedAudioInput) return;
+            
             message.text = "Recording on progress...";
             var index = PlayerPrefs.GetInt("user-mic-device-index");
             
@@ -72,7 +77,11 @@ namespace Samples.Whisper
         {
             if (!isRecording) return;  // Prevent stopping when not recording
 
+            Debug.Log("Recording input stopped");
             isRecording = false;
+
+            // audio setting in Context.cs
+            if (!Context.Instance.GetNeedAudioInput) return;            
             
             message.text = "Transcripting...";
             

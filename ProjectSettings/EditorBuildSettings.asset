@@ -21,7 +21,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Walking Nich.unity
     guid: 252ce6bd5d914426abae1cb0a4255305
   m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 76112c612ad1e4546af7cb36cd4eb112,
+      type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
       guid: 78db9094854a14a0a965197220f8f9af, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 7b04c3cb6aaf649d0b532d7db21f49fb,
+      type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: fa842acad81ff3647bfcb63ae322db92,
       type: 2}

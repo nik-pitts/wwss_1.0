@@ -130,6 +130,178 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""CharacterControlsKeyboard"",
+            ""id"": ""ebce863f-50d7-47b0-b725-6762b1c31206"",
+            ""actions"": [
+                {
+                    ""name"": ""Movement"",
+                    ""type"": ""Value"",
+                    ""id"": ""8a51b980-24a8-4d36-aab5-1069a2f70b10"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Record"",
+                    ""type"": ""Button"",
+                    ""id"": ""79fc3fec-1e2c-4e19-81f7-ddb28be57f7b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Rotation"",
+                    ""type"": ""Value"",
+                    ""id"": ""f60c8eaf-5625-4f15-9002-d47645b50ae3"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Run"",
+                    ""type"": ""Button"",
+                    ""id"": ""835d3432-5aac-4875-914b-a2ac6eb5872c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Throw"",
+                    ""type"": ""Button"",
+                    ""id"": ""618cfc58-f894-415a-ae82-edefb2960c1e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShowMouse"",
+                    ""type"": ""Button"",
+                    ""id"": ""a9fa7a71-f8ff-4d5b-861d-d23b09b6adb2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""502ece4e-d70d-494b-b77b-6fd7c3f2f3d6"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""5f1de9d0-1bd2-403d-b981-b069644a8594"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""616c0488-0290-46dd-807a-c238ced6bb00"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""b0a97283-ba55-4995-b102-dae068330c88"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""e8a878b0-d066-4101-9be5-ce918fa79172"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""422f0626-cc68-4dc3-acff-33a1fb1518d5"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Record"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0f1fea29-37db-4214-aebf-e2bfe9c05508"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": ""StickDeadzone"",
+                    ""groups"": """",
+                    ""action"": ""Rotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ac2c969b-8a2a-46fd-a3d1-1e4944a0b452"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""65919922-fe95-49ff-9670-03ca4b833e5d"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Throw"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bcc81d96-fd04-4142-8098-75ebe5904e55"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShowMouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -141,6 +313,14 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_CharacterControls_Rotation = m_CharacterControls.FindAction("Rotation", throwIfNotFound: true);
         m_CharacterControls_Run = m_CharacterControls.FindAction("Run", throwIfNotFound: true);
         m_CharacterControls_Throw = m_CharacterControls.FindAction("Throw", throwIfNotFound: true);
+        // CharacterControlsKeyboard
+        m_CharacterControlsKeyboard = asset.FindActionMap("CharacterControlsKeyboard", throwIfNotFound: true);
+        m_CharacterControlsKeyboard_Movement = m_CharacterControlsKeyboard.FindAction("Movement", throwIfNotFound: true);
+        m_CharacterControlsKeyboard_Record = m_CharacterControlsKeyboard.FindAction("Record", throwIfNotFound: true);
+        m_CharacterControlsKeyboard_Rotation = m_CharacterControlsKeyboard.FindAction("Rotation", throwIfNotFound: true);
+        m_CharacterControlsKeyboard_Run = m_CharacterControlsKeyboard.FindAction("Run", throwIfNotFound: true);
+        m_CharacterControlsKeyboard_Throw = m_CharacterControlsKeyboard.FindAction("Throw", throwIfNotFound: true);
+        m_CharacterControlsKeyboard_ShowMouse = m_CharacterControlsKeyboard.FindAction("ShowMouse", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -276,6 +456,92 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         }
     }
     public CharacterControlsActions @CharacterControls => new CharacterControlsActions(this);
+
+    // CharacterControlsKeyboard
+    private readonly InputActionMap m_CharacterControlsKeyboard;
+    private List<ICharacterControlsKeyboardActions> m_CharacterControlsKeyboardActionsCallbackInterfaces = new List<ICharacterControlsKeyboardActions>();
+    private readonly InputAction m_CharacterControlsKeyboard_Movement;
+    private readonly InputAction m_CharacterControlsKeyboard_Record;
+    private readonly InputAction m_CharacterControlsKeyboard_Rotation;
+    private readonly InputAction m_CharacterControlsKeyboard_Run;
+    private readonly InputAction m_CharacterControlsKeyboard_Throw;
+    private readonly InputAction m_CharacterControlsKeyboard_ShowMouse;
+    public struct CharacterControlsKeyboardActions
+    {
+        private @PlayerInput m_Wrapper;
+        public CharacterControlsKeyboardActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Movement => m_Wrapper.m_CharacterControlsKeyboard_Movement;
+        public InputAction @Record => m_Wrapper.m_CharacterControlsKeyboard_Record;
+        public InputAction @Rotation => m_Wrapper.m_CharacterControlsKeyboard_Rotation;
+        public InputAction @Run => m_Wrapper.m_CharacterControlsKeyboard_Run;
+        public InputAction @Throw => m_Wrapper.m_CharacterControlsKeyboard_Throw;
+        public InputAction @ShowMouse => m_Wrapper.m_CharacterControlsKeyboard_ShowMouse;
+        public InputActionMap Get() { return m_Wrapper.m_CharacterControlsKeyboard; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CharacterControlsKeyboardActions set) { return set.Get(); }
+        public void AddCallbacks(ICharacterControlsKeyboardActions instance)
+        {
+            if (instance == null || m_Wrapper.m_CharacterControlsKeyboardActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CharacterControlsKeyboardActionsCallbackInterfaces.Add(instance);
+            @Movement.started += instance.OnMovement;
+            @Movement.performed += instance.OnMovement;
+            @Movement.canceled += instance.OnMovement;
+            @Record.started += instance.OnRecord;
+            @Record.performed += instance.OnRecord;
+            @Record.canceled += instance.OnRecord;
+            @Rotation.started += instance.OnRotation;
+            @Rotation.performed += instance.OnRotation;
+            @Rotation.canceled += instance.OnRotation;
+            @Run.started += instance.OnRun;
+            @Run.performed += instance.OnRun;
+            @Run.canceled += instance.OnRun;
+            @Throw.started += instance.OnThrow;
+            @Throw.performed += instance.OnThrow;
+            @Throw.canceled += instance.OnThrow;
+            @ShowMouse.started += instance.OnShowMouse;
+            @ShowMouse.performed += instance.OnShowMouse;
+            @ShowMouse.canceled += instance.OnShowMouse;
+        }
+
+        private void UnregisterCallbacks(ICharacterControlsKeyboardActions instance)
+        {
+            @Movement.started -= instance.OnMovement;
+            @Movement.performed -= instance.OnMovement;
+            @Movement.canceled -= instance.OnMovement;
+            @Record.started -= instance.OnRecord;
+            @Record.performed -= instance.OnRecord;
+            @Record.canceled -= instance.OnRecord;
+            @Rotation.started -= instance.OnRotation;
+            @Rotation.performed -= instance.OnRotation;
+            @Rotation.canceled -= instance.OnRotation;
+            @Run.started -= instance.OnRun;
+            @Run.performed -= instance.OnRun;
+            @Run.canceled -= instance.OnRun;
+            @Throw.started -= instance.OnThrow;
+            @Throw.performed -= instance.OnThrow;
+            @Throw.canceled -= instance.OnThrow;
+            @ShowMouse.started -= instance.OnShowMouse;
+            @ShowMouse.performed -= instance.OnShowMouse;
+            @ShowMouse.canceled -= instance.OnShowMouse;
+        }
+
+        public void RemoveCallbacks(ICharacterControlsKeyboardActions instance)
+        {
+            if (m_Wrapper.m_CharacterControlsKeyboardActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ICharacterControlsKeyboardActions instance)
+        {
+            foreach (var item in m_Wrapper.m_CharacterControlsKeyboardActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_CharacterControlsKeyboardActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public CharacterControlsKeyboardActions @CharacterControlsKeyboard => new CharacterControlsKeyboardActions(this);
     public interface ICharacterControlsActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -283,5 +549,14 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnRotation(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
         void OnThrow(InputAction.CallbackContext context);
+    }
+    public interface ICharacterControlsKeyboardActions
+    {
+        void OnMovement(InputAction.CallbackContext context);
+        void OnRecord(InputAction.CallbackContext context);
+        void OnRotation(InputAction.CallbackContext context);
+        void OnRun(InputAction.CallbackContext context);
+        void OnThrow(InputAction.CallbackContext context);
+        void OnShowMouse(InputAction.CallbackContext context);
     }
 }

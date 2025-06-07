@@ -11,6 +11,8 @@ using Random=UnityEngine.Random;
 
 public class ChatGPTManager : MonoBehaviour
 {
+    public static ChatGPTManager Instance { get; private set; }
+
     public OnResponseEvent OnResponse;
     private string currentLocation = "Unknown";
     [SerializeField] private WebScrapper ws;
@@ -24,12 +26,13 @@ public class ChatGPTManager : MonoBehaviour
 
     // This part should be replaced to attacehd API key and organzation code
     // first place param : OpenAIApi 
-    // second place param : organizaiton key
-    private OpenAIApi openAI = new OpenAIApi();
-    private List<ChatMessage> messages = new List<ChatMessage>();
-    private List<ChatMessage> sharedPlaceMessages = new List<ChatMessage>();
-    private List<ChatMessage> sharedBhvrMessages = new List<ChatMessage>();
-    private List<ChatMessage> memories = new List<ChatMessage>();
+    // second place param : organizaiton key    
+
+    private OpenAIApi openAI;
+    private List<ChatMessage> messages;
+    private List<ChatMessage> sharedPlaceMessages;
+    private List<ChatMessage> sharedBhvrMessages;
+    private List<ChatMessage> memories;
     private List<int> randomQuery;
     private int formQNum;
     private string dynamicPrompt;
@@ -39,8 +42,17 @@ public class ChatGPTManager : MonoBehaviour
     private List<string> activitiesLog = new List<string>();
     private float activitiyProb = 0.2f;
 
-    private void Awake()
-    {
+    public void Init()
+    {        
+        if (Context.Instance.GetNeedApiInput) {
+            openAI = new OpenAIApi();
+        }
+        
+        messages = new List<ChatMessage>();
+        sharedPlaceMessages = new List<ChatMessage>();
+        sharedBhvrMessages = new List<ChatMessage>();
+        memories = new List<ChatMessage>();
+
         memoryManager = GetComponent<MemoryManager>();
     }
 
@@ -79,12 +91,14 @@ public class ChatGPTManager : MonoBehaviour
         messages.Add(promptMessage);
         
         // Bring memories if any
-        List<ChatMessage> loadedMemories = memoryManager.LoadMemories();
-        if (loadedMemories.Count != 0)
-        {
-            messages.AddRange(loadedMemories);
-            Debug.Log($"[ChatGPTManager] Loaded {loadedMemories.Count} past messages into memory.");
+        if (Context.Instance.GetNeedMemoryInput) {
+            List<ChatMessage> loadedMemories = memoryManager.LoadMemories();
+            if (loadedMemories.Count != 0) {
+                messages.AddRange(loadedMemories);
+                Debug.Log($"[ChatGPTManager] Loaded {loadedMemories.Count} past messages into memory.");
+            }
         }
+        
         
         // Add initial prompt about shared place dialogue
         ChatMessage sharedPlaceinitMessage = new ChatMessage { Role = "system", Content = sharedPlaceinitPrompt };
@@ -94,7 +108,10 @@ public class ChatGPTManager : MonoBehaviour
         ChatMessage sharedBhvrInitMessage = new ChatMessage { Role = "system", Content = sharedBhvrInitPrompt };
         sharedBhvrMessages.Add(sharedBhvrInitMessage);
         
-        AskChatGPT("Give warm greetings!", false, false);
+        // if api is enabled
+        if (Context.Instance.GetNeedApiInput) {
+            AskChatGPT("Give warm greetings!", false, false);
+        }        
     }
     
     public void AskChatGPTFromUI(string newText)
@@ -299,6 +316,9 @@ public class ChatGPTManager : MonoBehaviour
 
     public void NotifyActivityChange(string newActivity)
     {
+        // if api is not enabled, return
+        if (!Context.Instance.GetNeedApiInput) return;
+
         if (Random.value < activitiyProb)
         {
             string activityPrompt = $"{newActivity}" +

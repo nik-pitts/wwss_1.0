@@ -47,7 +47,7 @@ public class MemoryManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("[MemoryManager] No memory file found. Starting fresh.");
+            Debug.LogError("[MemoryManager] No memory file found. Starting fresh.");
         }
 
         if (loadedMemories.Count > 0)

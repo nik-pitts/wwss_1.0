@@ -40,7 +40,9 @@ public class CollisionHandler : MonoBehaviour
         if (!string.IsNullOrEmpty(placeName))
         {
             Debug.Log($"Entered {placeName} zone!");
-            chatGPTManager.NotifyLocationChange(placeName);
+            if (Context.Instance.GetNeedApiInput) {
+                chatGPTManager.NotifyLocationChange(placeName);
+            }            
         }
     }
 }
