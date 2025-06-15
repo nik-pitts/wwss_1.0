@@ -76,6 +76,10 @@ public class Context : MonoBehaviour
     public GameObject GetDesktopCameraObject => desktopCameraObject;
 
     [SerializeField]
+    private GameObject questCameraParent;
+    public GameObject GetQuestCameraParent => questCameraParent;
+
+    [SerializeField]
     private GameObject questCameraObject;
     public GameObject GetQuestCameraObject => questCameraObject;
 
@@ -139,7 +143,7 @@ public class Context : MonoBehaviour
         desktopCameraObject.SetActive(isUsingDesktopCamera);
         desktopCanvasObject.SetActive(isUsingDesktopCamera);
 
-        questCameraObject.SetActive(!isUsingDesktopCamera);
+        questCameraParent.SetActive(!isUsingDesktopCamera);
         questCanvasObject.SetActive(!isUsingDesktopCamera);
     }
 }

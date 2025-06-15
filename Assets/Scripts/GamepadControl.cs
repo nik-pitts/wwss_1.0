@@ -37,6 +37,12 @@ public class GamepadControl : MonoBehaviour
     private bool isAiming = false;
     private Vector3 aimDirection;
 
+    // for vr mechanism
+    private bool isFirstMoved;
+    private Vector3 vrForward;
+    private Vector3 vrRight;
+    private GameObject questCamera;
+
     private void Awake()
     {
         // init
@@ -222,14 +228,31 @@ public class GamepadControl : MonoBehaviour
         cameraLook = 
             (Context.Instance.GetCurrentCtrl == CtrlMechanism.gamepad || Context.Instance.GetCurrentCtrl == CtrlMechanism.keyboard) 
         ? Context.Instance.GetDesktopCameraObject.GetComponent<CameraLook>()
-        : Context.Instance.GetQuestCameraObject.GetComponent<CameraLook>();
+        : Context.Instance.GetQuestCameraParent.GetComponent<CameraLook>();
 
         characterController = GetComponent<CharacterController>();
         shootingStar = FindObjectOfType<ShootingStarMove>();
+
+        questCamera = Context.Instance.GetQuestCameraObject;
+        isFirstMoved = false;
     }
     
     private void FixedUpdate()
     {
+        if (Context.Instance.GetCurrentCtrl == CtrlMechanism.vrcontroller) {
+            if (movementPressed && !isFirstMoved) {
+                vrForward = questCamera.transform.forward;
+                vrRight = questCamera.transform.right;
+                vrForward.y = 0;
+                vrRight.y = 0;
+                vrForward.Normalize();
+
+                isFirstMoved = true;
+            } else if (!movementPressed && isFirstMoved) {
+                isFirstMoved = false;
+            }
+        }
+
         HandleMovement();
         HandleRotation();
         if (isAiming)
@@ -241,51 +264,60 @@ public class GamepadControl : MonoBehaviour
 
     void HandleMovement()
     {
-        Vector3 cameraForward = cameraLook.transform.forward;
-        Vector3 cameraRight = cameraLook.transform.right;
+        Vector3 cameraForward;
+        Vector3 cameraRight;
 
-        cameraForward.y = 0;
-        cameraRight.y = 0;
-        cameraForward.Normalize();
-        cameraRight.Normalize();
+        if (Context.Instance.GetCurrentCtrl != CtrlMechanism.vrcontroller) {
+            cameraForward = cameraLook.transform.forward;
+            cameraRight = cameraLook.transform.right;
+
+            cameraForward.y = 0;
+            cameraRight.y = 0;
+            cameraForward.Normalize();
+            cameraRight.Normalize();
+            
+        } else {
+            cameraForward = vrForward;
+            cameraRight = vrRight;
+        }
 
         Vector3 moveDirection = (cameraForward * currentMovement.y + cameraRight * currentMovement.x).normalized;
         float currentSpeed = isRunning ? moveSpeed * runSpeedMultiplier : moveSpeed;
 
-        if (movementPressed)
-        {
+        if (movementPressed) {
             velocity = Vector3.Lerp(velocity, moveDirection * currentSpeed, Time.deltaTime * acceleration);
-        }
-        else
-        {
+        } else {
             velocity = Vector3.Lerp(velocity, Vector3.zero, Time.deltaTime * deceleration);
         }
 
         Vector3 newPosition = transform.position + velocity * Time.deltaTime;
         RaycastHit hit;
 
-        if (Physics.Raycast(newPosition + Vector3.up * 1.5f, Vector3.down, out hit, 2.0f, LayerMask.GetMask("Terrain")))
-        {
+        if (Physics.Raycast(newPosition + Vector3.up * 1.5f, Vector3.down, out hit, 2.0f, LayerMask.GetMask("Terrain"))) {
             newPosition.y = hit.point.y;
         }
 
         characterController.Move(newPosition - transform.position);
+
     }
 
     void HandleRotation()
     {
         if (movementPressed)
         {
-            Vector3 moveDirection = (cameraLook.transform.forward * currentMovement.y +
+            if (Context.Instance.GetCurrentCtrl != CtrlMechanism.vrcontroller) {
+                Vector3 moveDirection = (cameraLook.transform.forward * currentMovement.y +
                                      cameraLook.transform.right * currentMovement.x);
-            moveDirection.y = 0;
+                moveDirection.y = 0;
 
-            if (moveDirection.sqrMagnitude > 0.01f)
-            {
-                Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
-                transform.rotation =
-                    Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
-            }
+                if (moveDirection.sqrMagnitude > 0.01f) {
+                    Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
+                    transform.rotation =
+                        Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+                }
+            } else {
+                // for future changes
+            }            
         }
     }
     
