@@ -19,6 +19,10 @@ public class CameraLook : MonoBehaviour
 
     void Update()
     {
+        if (Context.Instance.GetCurrentCtrl == CtrlMechanism.vrcontroller) {
+            return;
+        }
+
         float Sensitivity = Context.Instance.GetCameraSensitivity;
 
         if (Sensitivity <= 0f) return;
