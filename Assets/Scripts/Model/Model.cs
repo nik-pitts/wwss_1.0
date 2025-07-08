@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,4 +11,11 @@ public enum CtrlMechanism
     gamepad,
     keyboard,
     vrcontroller
+}
+
+[Serializable]
+public struct ContextData
+{
+    public string name;
+    public string value;
 }
