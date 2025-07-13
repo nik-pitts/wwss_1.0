@@ -49,6 +49,33 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Grab_right",
+                    "type": "Button",
+                    "id": "93ecf75f-25fc-4cf2-aa12-a5211b044cd1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Grab_left",
+                    "type": "Button",
+                    "id": "97800aa3-0e14-4513-98df-242262898054",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pour",
+                    "type": "Button",
+                    "id": "51684ec2-d153-46c1-acad-bdab3b1781af",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -66,7 +93,7 @@
                 {
                     "name": "",
                     "id": "bd213c00-bf24-48a7-83d1-2aab7e9fbbc8",
-                    "path": "<Gamepad>/leftShoulder",
+                    "path": "<Gamepad>/dpad/down",
                     "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "",
@@ -88,7 +115,7 @@
                 {
                     "name": "",
                     "id": "7f5049cc-a033-4a49-834d-49603a6ff9f1",
-                    "path": "<Gamepad>/rightShoulder",
+                    "path": "<SwitchProControllerHID>/buttonEast",
                     "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "",
@@ -104,6 +131,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "Throw",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c4b9a06c-a178-4090-9b90-ddea0758b2d7",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "Hold,Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Grab_right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0724e5ae-0d65-4a43-8ed4-23ba7d29ba1f",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "Hold,Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Grab_left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dc80d39b-4f01-44aa-a766-bc30571f3279",
+                    "path": "<SwitchProControllerHID>/buttonSouth",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pour",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -162,6 +222,24 @@
                     "name": "ShowMouse",
                     "type": "Button",
                     "id": "a9fa7a71-f8ff-4d5b-861d-d23b09b6adb2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Grab_right",
+                    "type": "Button",
+                    "id": "f70f1867-17bd-448d-97f9-5111e8613df4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Grab_left",
+                    "type": "Button",
+                    "id": "18e912ac-0d1f-4a17-982c-e1e174f212ca",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -278,6 +356,28 @@
                     "action": "ShowMouse",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1d97c72e-7a5c-4956-93e8-6ceb0e32cbe2",
+                    "path": "<Keyboard>/q",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Grab_right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ac09dfc6-106f-487c-a2ff-310d1c21a6f0",
+                    "path": "<Keyboard>/e",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Grab_left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -325,6 +425,24 @@
                     "name": "Throw",
                     "type": "Button",
                     "id": "82441487-620f-415b-af65-39f618f2c0b7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Grab_right",
+                    "type": "Button",
+                    "id": "bbd4c0a2-8980-4d31-b6ee-c2a4bab1263e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Grab_left",
+                    "type": "Button",
+                    "id": "c80688cc-d389-4ce5-ac5c-eb9a419b3895",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -378,23 +496,34 @@
                 },
                 {
                     "name": "",
-                    "id": "85524a76-26ff-4003-8358-0a085800b759",
-                    "path": "<XRController>{RightHand}/{PrimaryTrigger}",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Throw",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "feac70e5-9586-4f3e-b852-dd6bfc378ced",
                     "path": "<XRController>{LeftHand}/{Primary2DAxis}",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e382f231-98d3-4aa3-918b-d2fa33bb4505",
+                    "path": "<XRController>{RightHand}/{TriggerButton}",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Grab_right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d94aa8e7-7f0e-4bd7-9b7d-103c424b583e",
+                    "path": "<XRController>{LeftHand}/{TriggerButton}",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Grab_left",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

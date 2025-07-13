@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 
 public class CollisionHandler : MonoBehaviour
 {
-    public ChatGPTManager chatGPTManager; 
+    public ChatGPTManager chatGPTManager;
 
     private void Start()
     {
@@ -35,14 +36,21 @@ public class CollisionHandler : MonoBehaviour
         else if (other.CompareTag("Haystick"))
         {
             placeName = "Area with piles of hay stick";
+            Debug.Log("Haystick detected");
+
+        }
+        else if (other.CompareTag("Water"))
+        {
+            placeName = "Water";
+            Debug.Log("Waterbed detected");
         }
 
         if (!string.IsNullOrEmpty(placeName))
         {
-            Debug.Log($"Entered {placeName} zone!");
-            if (Context.Instance.GetNeedApiInput) {
+            if (Context.Instance.GetNeedApiInput)
+            {
                 chatGPTManager.NotifyLocationChange(placeName);
-            }            
+            }
         }
     }
 }

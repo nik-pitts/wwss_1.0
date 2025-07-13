@@ -13,12 +13,16 @@ public class GamepadControl : MonoBehaviour
 
     private PlayerInput input;
     private CameraLook cameraLook;
-    
-    
+
+
     public Vector2 currentMovement;
     public bool movementPressed;
     public float recordingOnProgress;
+    public bool canMove = true;
     public bool isRunning = false;
+    public bool isRightGrabbed = false;
+    public bool isLeftGrabbed = false;
+    public bool isPouring = false;
     public float moveSpeed = 3.0f;
     public float runSpeedMultiplier = 2.0f;
     public Vector2 cameraRotation;
@@ -29,10 +33,12 @@ public class GamepadControl : MonoBehaviour
 
     private Vector3 velocity = Vector3.zero;
     private CharacterController characterController;
-    
+
     [SerializeField] private GameObject throwablePrefab; // Assign in Unity Inspector
     [SerializeField] private Transform throwPoint; // Assign in Unity Inspector
     [SerializeField] private float throwForce = 15f;
+    [SerializeField] private GameObject leftHandController;
+    [SerializeField] private GameObject rightHandController;
     private GameObject heldObject;
     private bool isAiming = false;
     private Vector3 aimDirection;
@@ -46,9 +52,12 @@ public class GamepadControl : MonoBehaviour
     private void Awake()
     {
         // init
-        if (Instance == null) {
+        if (Instance == null)
+        {
             Instance = this;
-        } else {            
+        }
+        else
+        {
             Destroy(gameObject);
         }
     }
@@ -57,11 +66,13 @@ public class GamepadControl : MonoBehaviour
     {
         input = new PlayerInput();
 
-        InputSystem.onDeviceChange += (device, change) => {
+        InputSystem.onDeviceChange += (device, change) =>
+        {
             Debug.Log($"Device: {device.displayName}, Layout: {device.layout}, Change: {change}");
         };
 
-        switch (Context.Instance.GetCurrentCtrl) {
+        switch (Context.Instance.GetCurrentCtrl)
+        {
             case CtrlMechanism.gamepad:
                 RegisterControllerInput();
                 break;
@@ -74,7 +85,7 @@ public class GamepadControl : MonoBehaviour
             default:
                 break;
         }
-        
+
     }
 
     void RegisterControllerInput()
@@ -84,11 +95,13 @@ public class GamepadControl : MonoBehaviour
         input.CharacterControlsKeyboard.Disable();
 
         // move function
-        input.CharacterControls.Movement.performed += ctx => {
+        input.CharacterControls.Movement.performed += ctx =>
+        {
             currentMovement = ctx.ReadValue<Vector2>();
-            movementPressed = currentMovement.sqrMagnitude > 0;
+            movementPressed = currentMovement.sqrMagnitude > 0.01f;
         };
-        input.CharacterControls.Movement.canceled += ctx => {
+        input.CharacterControls.Movement.canceled += ctx =>
+        {
             currentMovement = Vector2.zero;
             movementPressed = false;
         };
@@ -105,28 +118,44 @@ public class GamepadControl : MonoBehaviour
         input.CharacterControls.Throw.canceled += ctx => ThrowObject();
 
         // camera rotation function
-        input.CharacterControls.Rotation.performed += ctx => {
+        input.CharacterControls.Rotation.performed += ctx =>
+        {
             cameraRotation = ctx.ReadValue<Vector2>();
-            if (cameraLook != null) {
+
+            if (cameraLook != null)
+            {
                 cameraLook.SetCameraInput(cameraRotation);
             }
         };
-        input.CharacterControls.Rotation.canceled += ctx => {
+        input.CharacterControls.Rotation.canceled += ctx =>
+        {
             cameraRotation = Vector2.zero;
             if (cameraLook != null)
                 cameraLook.SetCameraInput(Vector2.zero);
         };
 
         // show mouse cursor
-        InputSystem.onAnyButtonPress.CallOnce(ctrl => {
-            if (ctrl.device is Mouse) {
+        InputSystem.onAnyButtonPress.CallOnce(ctrl =>
+        {
+            if (ctrl.device is Mouse)
+            {
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
-            } else if (ctrl.device is Gamepad) {
+            }
+            else if (ctrl.device is Gamepad)
+            {
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
             }
         });
+
+        input.CharacterControls.Grab_right.performed += ctx => isRightGrabbed = true;
+        input.CharacterControls.Grab_right.canceled += ctx => isRightGrabbed = false;
+        input.CharacterControls.Grab_left.performed += ctx => isLeftGrabbed = true;
+        input.CharacterControls.Grab_left.canceled += ctx => isLeftGrabbed = false;
+
+        input.CharacterControls.Pour.performed += ctx => isPouring = true;
+        input.CharacterControls.Pour.canceled += ctx => isPouring = false;
     }
 
     /// <summary>
@@ -139,11 +168,13 @@ public class GamepadControl : MonoBehaviour
         input.CharacterControlsKeyboard.Enable();
 
         // move function
-        input.CharacterControlsKeyboard.Movement.performed += ctx => {
+        input.CharacterControlsKeyboard.Movement.performed += ctx =>
+        {
             currentMovement = ctx.ReadValue<Vector2>();
             movementPressed = currentMovement.sqrMagnitude > 0;
         };
-        input.CharacterControlsKeyboard.Movement.canceled += ctx => {
+        input.CharacterControlsKeyboard.Movement.canceled += ctx =>
+        {
             currentMovement = Vector2.zero;
             movementPressed = false;
         };
@@ -160,39 +191,48 @@ public class GamepadControl : MonoBehaviour
         input.CharacterControlsKeyboard.Throw.canceled += ctx => ThrowObject();
 
         // camera rotation function
-        input.CharacterControlsKeyboard.Rotation.performed += ctx => {
+        input.CharacterControlsKeyboard.Rotation.performed += ctx =>
+        {
             cameraRotation = ctx.ReadValue<Vector2>();
-            if (cameraLook != null) {
+            if (cameraLook != null)
+            {
                 cameraLook.SetCameraInput(cameraRotation);
             }
         };
-        input.CharacterControlsKeyboard.Rotation.canceled += ctx => {
+        input.CharacterControlsKeyboard.Rotation.canceled += ctx =>
+        {
             cameraRotation = Vector2.zero;
             if (cameraLook != null)
                 cameraLook.SetCameraInput(Vector2.zero);
         };
 
         // show mouse cursor
-        input.CharacterControlsKeyboard.ShowMouse.performed += ctx => {
+        input.CharacterControlsKeyboard.ShowMouse.performed += ctx =>
+        {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         };
+
+        input.CharacterControlsKeyboard.Grab_right.performed += ctx => isRightGrabbed = true;
+        input.CharacterControlsKeyboard.Grab_right.canceled += ctx => isRightGrabbed = false;
+        input.CharacterControlsKeyboard.Grab_left.performed += ctx => isLeftGrabbed = true;
+        input.CharacterControlsKeyboard.Grab_left.canceled += ctx => isLeftGrabbed = false;
     }
 
     void RegisterVRInput()
-    {        
+    {
         input.CharacterControlsController.Enable();
         input.CharacterControls.Disable();
         input.CharacterControlsKeyboard.Disable();
 
-        Debug.Log("VR input enabled");
-
         // move function
-        input.CharacterControlsController.Movement.performed += ctx => {
+        input.CharacterControlsController.Movement.performed += ctx =>
+        {
             currentMovement = ctx.ReadValue<Vector2>();
             movementPressed = currentMovement.sqrMagnitude > 0;
         };
-        input.CharacterControlsController.Movement.canceled += ctx => {
+        input.CharacterControlsController.Movement.canceled += ctx =>
+        {
             currentMovement = Vector2.zero;
             movementPressed = false;
         };
@@ -209,24 +249,32 @@ public class GamepadControl : MonoBehaviour
         input.CharacterControlsController.Throw.canceled += ctx => ThrowObject();
 
         // camera rotation function
-        input.CharacterControlsController.Rotation.performed += ctx => {
+        input.CharacterControlsController.Rotation.performed += ctx =>
+        {
             cameraRotation = ctx.ReadValue<Vector2>();
-            if (cameraLook != null) {
+            if (cameraLook != null)
+            {
                 cameraLook.SetCameraInput(cameraRotation);
             }
         };
-        input.CharacterControlsController.Rotation.canceled += ctx => {
+        input.CharacterControlsController.Rotation.canceled += ctx =>
+        {
             cameraRotation = Vector2.zero;
             if (cameraLook != null)
                 cameraLook.SetCameraInput(Vector2.zero);
         };
+
+        input.CharacterControlsController.Grab_right.performed += ctx => isRightGrabbed = true;
+        input.CharacterControlsController.Grab_right.canceled += ctx => isRightGrabbed = false;
+        input.CharacterControlsController.Grab_left.performed += ctx => isLeftGrabbed = true;
+        input.CharacterControlsController.Grab_left.canceled += ctx => isLeftGrabbed = false;
     }
 
     void Start()
     {
         // choose cameraLook
-        cameraLook = 
-            (Context.Instance.GetCurrentCtrl == CtrlMechanism.gamepad || Context.Instance.GetCurrentCtrl == CtrlMechanism.keyboard) 
+        cameraLook =
+            (Context.Instance.GetCurrentCtrl == CtrlMechanism.gamepad || Context.Instance.GetCurrentCtrl == CtrlMechanism.keyboard)
         ? Context.Instance.GetDesktopCameraObject.GetComponent<CameraLook>()
         : Context.Instance.GetQuestCameraParent.GetComponent<CameraLook>();
 
@@ -236,11 +284,13 @@ public class GamepadControl : MonoBehaviour
         questCamera = Context.Instance.GetQuestCameraObject;
         isFirstMoved = false;
     }
-    
+
     private void FixedUpdate()
     {
-        if (Context.Instance.GetCurrentCtrl == CtrlMechanism.vrcontroller) {
-            if (movementPressed && !isFirstMoved) {
+        if (Context.Instance.GetCurrentCtrl == CtrlMechanism.vrcontroller)
+        {
+            if (movementPressed && !isFirstMoved)
+            {
                 vrForward = questCamera.transform.forward;
                 vrRight = questCamera.transform.right;
                 vrForward.y = 0;
@@ -248,7 +298,9 @@ public class GamepadControl : MonoBehaviour
                 vrForward.Normalize();
 
                 isFirstMoved = true;
-            } else if (!movementPressed && isFirstMoved) {
+            }
+            else if (!movementPressed && isFirstMoved)
+            {
                 isFirstMoved = false;
             }
         }
@@ -258,7 +310,10 @@ public class GamepadControl : MonoBehaviour
         if (isAiming)
         {
             HandleAiming();
-            UpdateBallPosition();
+        }
+        if (isRightGrabbed && isLeftGrabbed)
+        {
+            Debug.Log("Both hands are grabbing");
         }
     }
 
@@ -266,8 +321,10 @@ public class GamepadControl : MonoBehaviour
     {
         Vector3 cameraForward;
         Vector3 cameraRight;
-
-        if (Context.Instance.GetCurrentCtrl != CtrlMechanism.vrcontroller) {
+        
+        // Setting camera direction based on control mechanism
+        if (Context.Instance.GetCurrentCtrl != CtrlMechanism.vrcontroller)
+        {
             cameraForward = cameraLook.transform.forward;
             cameraRight = cameraLook.transform.right;
 
@@ -275,25 +332,33 @@ public class GamepadControl : MonoBehaviour
             cameraRight.y = 0;
             cameraForward.Normalize();
             cameraRight.Normalize();
-            
-        } else {
+
+        }
+        else
+        {
             cameraForward = vrForward;
             cameraRight = vrRight;
         }
 
+        // Calculate movement direction based on camera orientation
         Vector3 moveDirection = (cameraForward * currentMovement.y + cameraRight * currentMovement.x).normalized;
+
         float currentSpeed = isRunning ? moveSpeed * runSpeedMultiplier : moveSpeed;
 
-        if (movementPressed) {
+        if (movementPressed)
+        {
             velocity = Vector3.Lerp(velocity, moveDirection * currentSpeed, Time.deltaTime * acceleration);
-        } else {
+        }
+        else
+        {
             velocity = Vector3.Lerp(velocity, Vector3.zero, Time.deltaTime * deceleration);
         }
 
         Vector3 newPosition = transform.position + velocity * Time.deltaTime;
         RaycastHit hit;
 
-        if (Physics.Raycast(newPosition + Vector3.up * 1.5f, Vector3.down, out hit, 2.0f, LayerMask.GetMask("Terrain"))) {
+        if (Physics.Raycast(newPosition + Vector3.up * 1.5f, Vector3.down, out hit, 2.0f, LayerMask.GetMask("Terrain")))
+        {
             newPosition.y = hit.point.y;
         }
 
@@ -303,37 +368,32 @@ public class GamepadControl : MonoBehaviour
 
     void HandleRotation()
     {
-        if (movementPressed)
+        if (cameraRotation.sqrMagnitude > 0.01f)
         {
-            if (Context.Instance.GetCurrentCtrl != CtrlMechanism.vrcontroller) {
-                Vector3 moveDirection = (cameraLook.transform.forward * currentMovement.y +
-                                     cameraLook.transform.right * currentMovement.x);
-                moveDirection.y = 0;
-
-                if (moveDirection.sqrMagnitude > 0.01f) {
-                    Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
-                    transform.rotation =
-                        Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
-                }
-            } else {
+            if (Context.Instance.GetCurrentCtrl != CtrlMechanism.vrcontroller)
+            {
+                float rotationInput = cameraRotation.x;
+                transform.Rotate(0, rotationInput * rotationSpeed * Time.deltaTime, 0);
+            }
+            else
+            {
                 // for future changes
-            }            
+            }
         }
     }
     
     private void StartAiming()
     {
-        Debug.Log("Aiming...");
         if (heldObject != null) return;
 
         isAiming = true;
         shootingStar.StartAiming();
-
+        
         // Instantiate object in hand
         heldObject = Instantiate(throwablePrefab, throwPoint.position, throwPoint.rotation);
         heldObject.transform.SetParent(throwPoint);
         heldObject.transform.localPosition = Vector3.zero;
-        
+
         Rigidbody rb = heldObject.GetComponent<Rigidbody>();
         if (rb != null)
         {
@@ -341,7 +401,7 @@ public class GamepadControl : MonoBehaviour
             rb.isKinematic = true; // Prevent physics movement while aiming
         }
     }
-    
+
     private void HandleAiming()
     {
         if (isAiming)
@@ -351,19 +411,13 @@ public class GamepadControl : MonoBehaviour
         }
     }
 
-    private void UpdateBallPosition()
-    {
-        heldObject.transform.position = throwPoint.position;
-        heldObject.transform.rotation = throwPoint.rotation;
-    }
-    
     private void ThrowObject()
     {
         Debug.Log("Throwing...");
         if (heldObject == null) return;
 
         isAiming = false;
-        shootingStar.StopAiming(); 
+        shootingStar.StopAiming();
 
         heldObject.transform.SetParent(null);
         Rigidbody rb = heldObject.GetComponent<Rigidbody>();
@@ -378,7 +432,12 @@ public class GamepadControl : MonoBehaviour
         shootingStar.ChaseBall(heldObject);
         heldObject = null; // Reset reference
     }
-    
+
+    public Vector3 GetHandPosition()
+    {
+        Vector3 handPosition = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
+        return handPosition;
+    }
     // private void OnEnable() { input.CharacterControls.Enable(); }
     // private void OnDisable() { input.CharacterControls.Disable(); }
 }

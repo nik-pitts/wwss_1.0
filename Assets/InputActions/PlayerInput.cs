@@ -71,6 +71,33 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Grab_right"",
+                    ""type"": ""Button"",
+                    ""id"": ""93ecf75f-25fc-4cf2-aa12-a5211b044cd1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Grab_left"",
+                    ""type"": ""Button"",
+                    ""id"": ""97800aa3-0e14-4513-98df-242262898054"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pour"",
+                    ""type"": ""Button"",
+                    ""id"": ""51684ec2-d153-46c1-acad-bdab3b1781af"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -88,7 +115,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""bd213c00-bf24-48a7-83d1-2aab7e9fbbc8"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""path"": ""<Gamepad>/dpad/down"",
                     ""interactions"": ""Press(behavior=2)"",
                     ""processors"": """",
                     ""groups"": """",
@@ -110,7 +137,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""7f5049cc-a033-4a49-834d-49603a6ff9f1"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""path"": ""<SwitchProControllerHID>/buttonEast"",
                     ""interactions"": ""Press(behavior=2)"",
                     ""processors"": """",
                     ""groups"": """",
@@ -126,6 +153,39 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Throw"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c4b9a06c-a178-4090-9b90-ddea0758b2d7"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": ""Hold,Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grab_right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0724e5ae-0d65-4a43-8ed4-23ba7d29ba1f"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": ""Hold,Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grab_left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dc80d39b-4f01-44aa-a766-bc30571f3279"",
+                    ""path"": ""<SwitchProControllerHID>/buttonSouth"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pour"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -184,6 +244,24 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""name"": ""ShowMouse"",
                     ""type"": ""Button"",
                     ""id"": ""a9fa7a71-f8ff-4d5b-861d-d23b09b6adb2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Grab_right"",
+                    ""type"": ""Button"",
+                    ""id"": ""f70f1867-17bd-448d-97f9-5111e8613df4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Grab_left"",
+                    ""type"": ""Button"",
+                    ""id"": ""18e912ac-0d1f-4a17-982c-e1e174f212ca"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -300,6 +378,28 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""ShowMouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1d97c72e-7a5c-4956-93e8-6ceb0e32cbe2"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grab_right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ac09dfc6-106f-487c-a2ff-310d1c21a6f0"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grab_left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -347,6 +447,24 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""name"": ""Throw"",
                     ""type"": ""Button"",
                     ""id"": ""82441487-620f-415b-af65-39f618f2c0b7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Grab_right"",
+                    ""type"": ""Button"",
+                    ""id"": ""bbd4c0a2-8980-4d31-b6ee-c2a4bab1263e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Grab_left"",
+                    ""type"": ""Button"",
+                    ""id"": ""c80688cc-d389-4ce5-ac5c-eb9a419b3895"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -400,23 +518,34 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""85524a76-26ff-4003-8358-0a085800b759"",
-                    ""path"": ""<XRController>{RightHand}/{PrimaryTrigger}"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Throw"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""feac70e5-9586-4f3e-b852-dd6bfc378ced"",
                     ""path"": ""<XRController>{LeftHand}/{Primary2DAxis}"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e382f231-98d3-4aa3-918b-d2fa33bb4505"",
+                    ""path"": ""<XRController>{RightHand}/{TriggerButton}"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grab_right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d94aa8e7-7f0e-4bd7-9b7d-103c424b583e"",
+                    ""path"": ""<XRController>{LeftHand}/{TriggerButton}"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grab_left"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -438,6 +567,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_CharacterControls_Rotation = m_CharacterControls.FindAction("Rotation", throwIfNotFound: true);
         m_CharacterControls_Run = m_CharacterControls.FindAction("Run", throwIfNotFound: true);
         m_CharacterControls_Throw = m_CharacterControls.FindAction("Throw", throwIfNotFound: true);
+        m_CharacterControls_Grab_right = m_CharacterControls.FindAction("Grab_right", throwIfNotFound: true);
+        m_CharacterControls_Grab_left = m_CharacterControls.FindAction("Grab_left", throwIfNotFound: true);
+        m_CharacterControls_Pour = m_CharacterControls.FindAction("Pour", throwIfNotFound: true);
         // CharacterControlsKeyboard
         m_CharacterControlsKeyboard = asset.FindActionMap("CharacterControlsKeyboard", throwIfNotFound: true);
         m_CharacterControlsKeyboard_Movement = m_CharacterControlsKeyboard.FindAction("Movement", throwIfNotFound: true);
@@ -446,6 +578,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_CharacterControlsKeyboard_Run = m_CharacterControlsKeyboard.FindAction("Run", throwIfNotFound: true);
         m_CharacterControlsKeyboard_Throw = m_CharacterControlsKeyboard.FindAction("Throw", throwIfNotFound: true);
         m_CharacterControlsKeyboard_ShowMouse = m_CharacterControlsKeyboard.FindAction("ShowMouse", throwIfNotFound: true);
+        m_CharacterControlsKeyboard_Grab_right = m_CharacterControlsKeyboard.FindAction("Grab_right", throwIfNotFound: true);
+        m_CharacterControlsKeyboard_Grab_left = m_CharacterControlsKeyboard.FindAction("Grab_left", throwIfNotFound: true);
         // CharacterControlsController
         m_CharacterControlsController = asset.FindActionMap("CharacterControlsController", throwIfNotFound: true);
         m_CharacterControlsController_Movement = m_CharacterControlsController.FindAction("Movement", throwIfNotFound: true);
@@ -453,6 +587,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_CharacterControlsController_Rotation = m_CharacterControlsController.FindAction("Rotation", throwIfNotFound: true);
         m_CharacterControlsController_Run = m_CharacterControlsController.FindAction("Run", throwIfNotFound: true);
         m_CharacterControlsController_Throw = m_CharacterControlsController.FindAction("Throw", throwIfNotFound: true);
+        m_CharacterControlsController_Grab_right = m_CharacterControlsController.FindAction("Grab_right", throwIfNotFound: true);
+        m_CharacterControlsController_Grab_left = m_CharacterControlsController.FindAction("Grab_left", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -519,6 +655,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterControls_Rotation;
     private readonly InputAction m_CharacterControls_Run;
     private readonly InputAction m_CharacterControls_Throw;
+    private readonly InputAction m_CharacterControls_Grab_right;
+    private readonly InputAction m_CharacterControls_Grab_left;
+    private readonly InputAction m_CharacterControls_Pour;
     public struct CharacterControlsActions
     {
         private @PlayerInput m_Wrapper;
@@ -528,6 +667,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Rotation => m_Wrapper.m_CharacterControls_Rotation;
         public InputAction @Run => m_Wrapper.m_CharacterControls_Run;
         public InputAction @Throw => m_Wrapper.m_CharacterControls_Throw;
+        public InputAction @Grab_right => m_Wrapper.m_CharacterControls_Grab_right;
+        public InputAction @Grab_left => m_Wrapper.m_CharacterControls_Grab_left;
+        public InputAction @Pour => m_Wrapper.m_CharacterControls_Pour;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -552,6 +694,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Throw.started += instance.OnThrow;
             @Throw.performed += instance.OnThrow;
             @Throw.canceled += instance.OnThrow;
+            @Grab_right.started += instance.OnGrab_right;
+            @Grab_right.performed += instance.OnGrab_right;
+            @Grab_right.canceled += instance.OnGrab_right;
+            @Grab_left.started += instance.OnGrab_left;
+            @Grab_left.performed += instance.OnGrab_left;
+            @Grab_left.canceled += instance.OnGrab_left;
+            @Pour.started += instance.OnPour;
+            @Pour.performed += instance.OnPour;
+            @Pour.canceled += instance.OnPour;
         }
 
         private void UnregisterCallbacks(ICharacterControlsActions instance)
@@ -571,6 +722,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Throw.started -= instance.OnThrow;
             @Throw.performed -= instance.OnThrow;
             @Throw.canceled -= instance.OnThrow;
+            @Grab_right.started -= instance.OnGrab_right;
+            @Grab_right.performed -= instance.OnGrab_right;
+            @Grab_right.canceled -= instance.OnGrab_right;
+            @Grab_left.started -= instance.OnGrab_left;
+            @Grab_left.performed -= instance.OnGrab_left;
+            @Grab_left.canceled -= instance.OnGrab_left;
+            @Pour.started -= instance.OnPour;
+            @Pour.performed -= instance.OnPour;
+            @Pour.canceled -= instance.OnPour;
         }
 
         public void RemoveCallbacks(ICharacterControlsActions instance)
@@ -598,6 +758,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterControlsKeyboard_Run;
     private readonly InputAction m_CharacterControlsKeyboard_Throw;
     private readonly InputAction m_CharacterControlsKeyboard_ShowMouse;
+    private readonly InputAction m_CharacterControlsKeyboard_Grab_right;
+    private readonly InputAction m_CharacterControlsKeyboard_Grab_left;
     public struct CharacterControlsKeyboardActions
     {
         private @PlayerInput m_Wrapper;
@@ -608,6 +770,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Run => m_Wrapper.m_CharacterControlsKeyboard_Run;
         public InputAction @Throw => m_Wrapper.m_CharacterControlsKeyboard_Throw;
         public InputAction @ShowMouse => m_Wrapper.m_CharacterControlsKeyboard_ShowMouse;
+        public InputAction @Grab_right => m_Wrapper.m_CharacterControlsKeyboard_Grab_right;
+        public InputAction @Grab_left => m_Wrapper.m_CharacterControlsKeyboard_Grab_left;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControlsKeyboard; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -635,6 +799,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @ShowMouse.started += instance.OnShowMouse;
             @ShowMouse.performed += instance.OnShowMouse;
             @ShowMouse.canceled += instance.OnShowMouse;
+            @Grab_right.started += instance.OnGrab_right;
+            @Grab_right.performed += instance.OnGrab_right;
+            @Grab_right.canceled += instance.OnGrab_right;
+            @Grab_left.started += instance.OnGrab_left;
+            @Grab_left.performed += instance.OnGrab_left;
+            @Grab_left.canceled += instance.OnGrab_left;
         }
 
         private void UnregisterCallbacks(ICharacterControlsKeyboardActions instance)
@@ -657,6 +827,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @ShowMouse.started -= instance.OnShowMouse;
             @ShowMouse.performed -= instance.OnShowMouse;
             @ShowMouse.canceled -= instance.OnShowMouse;
+            @Grab_right.started -= instance.OnGrab_right;
+            @Grab_right.performed -= instance.OnGrab_right;
+            @Grab_right.canceled -= instance.OnGrab_right;
+            @Grab_left.started -= instance.OnGrab_left;
+            @Grab_left.performed -= instance.OnGrab_left;
+            @Grab_left.canceled -= instance.OnGrab_left;
         }
 
         public void RemoveCallbacks(ICharacterControlsKeyboardActions instance)
@@ -683,6 +859,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterControlsController_Rotation;
     private readonly InputAction m_CharacterControlsController_Run;
     private readonly InputAction m_CharacterControlsController_Throw;
+    private readonly InputAction m_CharacterControlsController_Grab_right;
+    private readonly InputAction m_CharacterControlsController_Grab_left;
     public struct CharacterControlsControllerActions
     {
         private @PlayerInput m_Wrapper;
@@ -692,6 +870,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Rotation => m_Wrapper.m_CharacterControlsController_Rotation;
         public InputAction @Run => m_Wrapper.m_CharacterControlsController_Run;
         public InputAction @Throw => m_Wrapper.m_CharacterControlsController_Throw;
+        public InputAction @Grab_right => m_Wrapper.m_CharacterControlsController_Grab_right;
+        public InputAction @Grab_left => m_Wrapper.m_CharacterControlsController_Grab_left;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControlsController; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -716,6 +896,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Throw.started += instance.OnThrow;
             @Throw.performed += instance.OnThrow;
             @Throw.canceled += instance.OnThrow;
+            @Grab_right.started += instance.OnGrab_right;
+            @Grab_right.performed += instance.OnGrab_right;
+            @Grab_right.canceled += instance.OnGrab_right;
+            @Grab_left.started += instance.OnGrab_left;
+            @Grab_left.performed += instance.OnGrab_left;
+            @Grab_left.canceled += instance.OnGrab_left;
         }
 
         private void UnregisterCallbacks(ICharacterControlsControllerActions instance)
@@ -735,6 +921,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Throw.started -= instance.OnThrow;
             @Throw.performed -= instance.OnThrow;
             @Throw.canceled -= instance.OnThrow;
+            @Grab_right.started -= instance.OnGrab_right;
+            @Grab_right.performed -= instance.OnGrab_right;
+            @Grab_right.canceled -= instance.OnGrab_right;
+            @Grab_left.started -= instance.OnGrab_left;
+            @Grab_left.performed -= instance.OnGrab_left;
+            @Grab_left.canceled -= instance.OnGrab_left;
         }
 
         public void RemoveCallbacks(ICharacterControlsControllerActions instance)
@@ -768,6 +960,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnRotation(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
         void OnThrow(InputAction.CallbackContext context);
+        void OnGrab_right(InputAction.CallbackContext context);
+        void OnGrab_left(InputAction.CallbackContext context);
+        void OnPour(InputAction.CallbackContext context);
     }
     public interface ICharacterControlsKeyboardActions
     {
@@ -777,6 +972,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnRun(InputAction.CallbackContext context);
         void OnThrow(InputAction.CallbackContext context);
         void OnShowMouse(InputAction.CallbackContext context);
+        void OnGrab_right(InputAction.CallbackContext context);
+        void OnGrab_left(InputAction.CallbackContext context);
     }
     public interface ICharacterControlsControllerActions
     {
@@ -785,5 +982,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnRotation(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
         void OnThrow(InputAction.CallbackContext context);
+        void OnGrab_right(InputAction.CallbackContext context);
+        void OnGrab_left(InputAction.CallbackContext context);
     }
 }
