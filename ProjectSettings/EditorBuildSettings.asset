@@ -8,9 +8,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Walking Nich.unity
     guid: 252ce6bd5d914426abae1cb0a4255305
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Quest Walking/AR Walking.unity
     guid: 5915454daf6b0a14182c9e51963f3608
+  - enabled: 1
+    path: Assets/Scenes/WebSocketTest/WebSocketTest.unity
+    guid: 8d110fb904a5ca64f839c6a10d24683f
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 76112c612ad1e4546af7cb36cd4eb112,
       type: 2}
