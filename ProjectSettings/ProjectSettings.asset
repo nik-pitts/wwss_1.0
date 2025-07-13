@@ -142,7 +142,7 @@ PlayerSettings:
   bundleVersion: 1.0.2
   preloadedAssets:
   - {fileID: 11400000, guid: 52a1cab393a1d404fbea1d1fcd37594f, type: 2}
-  - {fileID: 11400000, guid: d88fb74e86c22c441b710878cd9abadf, type: 2}
+  - {fileID: 0}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -936,7 +936,13 @@ PlayerSettings:
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
   cloudServicesEnabled:
+    Build: 0
+    Game Performance: 0
+    Legacy Analytics: 0
+    Purchasing: 0
+    UDP: 0
     UNet: 1
+    Unity Ads: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -956,11 +962,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 1
   windowsGamepadBackendHint: 0
-  cloudProjectId: e92fe46e-0d76-44db-9e06-7ebeb1a0cadd
+  cloudProjectId: 36eff208-465b-4861-a970-038f134d74a2
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: walk_with_shootingstar
-  organizationId: nnkim
+  organizationId: nikpitt
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
