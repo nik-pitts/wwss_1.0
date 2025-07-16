@@ -160,7 +160,7 @@
                     "name": "",
                     "id": "dc80d39b-4f01-44aa-a766-bc30571f3279",
                     "path": "<SwitchProControllerHID>/buttonSouth",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
                     "action": "Pour",

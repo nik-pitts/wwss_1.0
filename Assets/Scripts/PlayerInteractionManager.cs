@@ -13,6 +13,7 @@ public class PlayerInteractionManager : MonoBehaviour
     [SerializeField] private GameObject seedBoxObject;
     [SerializeField] private Transform handPosition;
     [SerializeField] private GameObject seed;
+    [SerializeField] private GameObject jar;
     private Transform[] rocks;
     private Transform[] flowers;
     private Transform[] seeds;
@@ -21,8 +22,10 @@ public class PlayerInteractionManager : MonoBehaviour
     public bool isNearFlower;
     public bool isNearSeed;
     public bool isNearSeedBox = false;
+    public bool isNearJar = false;
     private bool wasNearFlower = false;
     private bool wasNearSeedBox = false;
+    private bool hasAlreadyPoured = false;
     private Transform currentFlower = null; // Track which flower we're interacting with
     private float interactableDistance = 2f;
     private float flowerInteractableDistance = 4f;
@@ -32,6 +35,7 @@ public class PlayerInteractionManager : MonoBehaviour
     public bool isHoldingRock = false;
     public bool isHoldingFlower = false;
     public bool isHoldingSeed = false;
+    public bool isHoldingJar = false;
     private GamepadControl playerController;
     public int numOfFlowersCollected = 0;
     public int numOfSeedsCollected = 0;
@@ -52,6 +56,7 @@ public class PlayerInteractionManager : MonoBehaviour
         CheckIsNearRock();
         CheckIsNearFlower();
         CheckIsNearSeed();
+        CheckIsNearJar();
         CheckIsNearSeedBox();
 
         // Clear text when moving away from flower
@@ -143,8 +148,27 @@ public class PlayerInteractionManager : MonoBehaviour
         }
     }
 
+    void CheckIsNearJar()
+    {
+        isNearJar = false;
+        if (jar == null) return;
+
+        Vector2 jarPosition = new Vector2(jar.transform.position.x, jar.transform  .position.z);
+        Vector2 playerPosition = new Vector2(transform.position.x, transform.position.z);
+        float distance = Vector2.Distance(playerPosition, jarPosition);
+        if (distance < interactableDistance)
+        {
+            isNearJar = true;
+            HandleJarInteraction(jar.transform);
+        }
+    }   
+
     void HandleRockInteraction(Transform rock)
     {
+        if (!rock.GetComponent<RockBehavior>().isInteractable)
+        {
+            return; // Skip interaction if rock is not interactable
+        }
         if (playerController.isLeftGrabbed && playerController.isRightGrabbed)
         {
             if (isHoldingRock) return; // Already holding a rock
@@ -261,19 +285,26 @@ public class PlayerInteractionManager : MonoBehaviour
 
     void HandleSeedBoxInteraction(Transform seedBox)
     {
-        if (playerController.isPouring)
+        if (playerController.isPouring && !hasAlreadyPoured)
         {
             Vector3 seedBoxPosition = seedBox.position;
             for (int i = 0; i < numOfSeedsCollected; i++)
             {
-                // Instantiate seeds at the seed box position
                 GameObject newSeed = Instantiate(seed, seedBoxPosition, Quaternion.identity);
                 newSeed.GetComponent<SphereCollider>().isTrigger = false;
                 newSeed.GetComponent<Rigidbody>().isKinematic = false;
                 newSeed.GetComponent<Rigidbody>().useGravity = true;
-                newSeed.transform.SetParent(seedBox); // Set parent to seed box
+                newSeed.transform.SetParent(seedBox);
             }
+            numOfSeedsCollected = 0;
+            hasAlreadyPoured = true;
             Debug.Log("Player is pouring");
+        }
+
+        // Reset flag when not pouring
+        if (!playerController.isPouring)
+        {
+            hasAlreadyPoured = false;
         }
         if (!wasNearSeedBox)
         {
@@ -284,7 +315,7 @@ public class PlayerInteractionManager : MonoBehaviour
                 b.enabled = true;
         }
     }
-    
+
     void ClearSeedBoxText(Transform seedBox)
     {
         if (wasNearSeedBox)
@@ -295,4 +326,37 @@ public class PlayerInteractionManager : MonoBehaviour
                 b.enabled = false;
         }
     }
+    
+    void HandleJarInteraction(Transform jar)
+    {
+        if (playerController.isLeftGrabbed && playerController.isRightGrabbed)
+        {
+            if (isHoldingJar) return; // Already holding a rock
+            Rigidbody jarRigidbody = jar.Find("Jar").GetComponent<Rigidbody>();
+            if (jarRigidbody != null)
+            {
+                jarRigidbody.isKinematic = true;
+                jarRigidbody.useGravity = false;
+            }
+            jar.SetParent(handPosition);
+            isHoldingJar = true;
+            jar.localPosition = Vector3.zero;
+        }
+        else
+        {
+            // Create UI elements to show how to interact with the rock
+            // For example, show a tooltip or highlight the rock
+
+            // Drop the jar
+            Rigidbody jarRigidbody = jar.Find("Jar").GetComponent<Rigidbody>();
+            if (jarRigidbody != null)
+            {
+                jarRigidbody.isKinematic = false; // Enable physics
+                jarRigidbody.useGravity = true; // Enable gravity
+            }
+
+            jar.SetParent(null);
+            isHoldingJar = false;
+        }
+    }   
 }
