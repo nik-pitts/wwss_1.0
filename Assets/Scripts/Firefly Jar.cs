@@ -5,7 +5,9 @@ using UnityEngine;
 public class FireflyJar : MonoBehaviour
 {
     [SerializeField] float lightUpTime = 3.0f; // Time in seconds to light up the jar
-    float onStayTime = 0.0f;
+    private float onStayTime = 0.0f;
+    private bool isLightOn = false;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -15,17 +17,20 @@ public class FireflyJar : MonoBehaviour
     // Update is called once per frame
     private void OnTriggerStay(Collider other)
     {
-        if (other != null && other.CompareTag("Firefly"))
+        if (other != null && other.CompareTag("Firefly") && !isLightOn)
         {
             onStayTime += Time.deltaTime;
-            // light up the jar when a firefly is inside for more than the specified time
+        
             if (onStayTime > lightUpTime)
             {
                 Debug.Log("Firefly detected, lighting up the jar");
-                Renderer jarRenderer = GetComponent<Renderer>();
-                Material jarMaterial = jarRenderer.material;
-                jarMaterial.EnableKeyword("_EMISSION");
-                StartCoroutine(ScaleDown(other.transform, 2f));
+                Light light = GetComponentInChildren<Light>();
+            
+                if (light != null)
+                {
+                    light.enabled = true;
+                    isLightOn = true;
+                }
             }
         }
     }

@@ -12,9 +12,8 @@ public class GamepadControl : MonoBehaviour
     public static GamepadControl Instance { get; private set; }
 
     private PlayerInput input;
+   
     private CameraLook cameraLook;
-
-
     public Vector2 currentMovement;
     public bool movementPressed;
     public float recordingOnProgress;
@@ -310,10 +309,6 @@ public class GamepadControl : MonoBehaviour
         if (isAiming)
         {
             HandleAiming();
-        }
-        if (isRightGrabbed && isLeftGrabbed)
-        {
-            Debug.Log("Both hands are grabbing");
         }
     }
 

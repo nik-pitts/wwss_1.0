@@ -21,7 +21,7 @@ public class RockSnappingBox : MonoBehaviour
             if (!wasSet)
             {
                 wasSet = true;
-                other.GetComponent<RockBehavior>().isInteractable = false;
+                other.GetComponent<ObjectGrabbable>().isInteractable = false;
                 other.transform.localPosition = transform.localPosition;
             }
         }
