@@ -34,7 +34,7 @@ public class WebSocketClient : MonoBehaviour
     public static WebSocketClient Instance { get; private set; }
 
     private WebSocket websocket;
-    private const string SERVER_URI = "ws://10.0.0.15:2025/quest";
+    private const string SERVER_URI = "ws://172.20.10.2:2025/quest";
 
     [Header("When Receives Message")]
     public UnityEvent<string> onReceivedMessage;
